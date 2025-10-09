@@ -3,42 +3,11 @@ import Image from 'next/image';
 
 interface EventCardProps {
   data: EventData;
-  isFeatured?: boolean; // Para o card do meio que parece ter um destaque (borda mais clara)
+  isFeatured?: boolean;
 }
 
 export function EventCard({ data, isFeatured = false }: EventCardProps) {
-  const { imageSrc, title, subtitle, author, category } = data;
-
-  // Renderiza a informação do autor/categoria abaixo do título
-  const renderCardFooter = () => {
-    if (author && category) {
-      return (
-        <div className="flex text-xs space-x-2">
-          <span className="font-bold border-r border-white/50 pr-2">BY {author.toUpperCase()}</span>
-          <span className="text-pink-400">{category.toUpperCase()}</span>
-        </div>
-      );
-    }
-    // Caso do primeiro card em português
-    if (subtitle) {
-      return (
-        <div className="flex text-xs space-x-2">
-          <span className="font-bold border-r border-white/50 pr-2">BY CHIARI SATO</span>
-          <span className="text-yellow-400">CASE STUDIES</span>
-        </div>
-      );
-    }
-    // Caso do terceiro card
-    if (author && !category) {
-        return (
-            <div className="flex text-xs space-x-2">
-                <span className="font-bold border-r border-white/50 pr-2">BY OLIVIA WILSON</span>
-                <span className="text-yellow-400">CONTENT STRATEGY</span>
-            </div>
-        );
-    }
-    return null;
-  };
+  const { imageSrc, title, subtitle, author, category, date } = data;
 
   return (
     // Largura padrão para o card no Swiper. A classe 'swiper-slide' será adicionada automaticamente.
@@ -51,9 +20,9 @@ export function EventCard({ data, isFeatured = false }: EventCardProps) {
         <Image 
           src={imageSrc} 
           alt={title} 
-          layout="fill" 
-          objectFit="cover" 
-          className="opacity-70 group-hover:opacity-100 transition-opacity" 
+          fill={true} 
+ 
+          className="opacity-70 object group-hover:opacity-100 transition-opacity" 
         />
         <div className="absolute inset-0 bg-black/50 hover:bg-black/40 transition-colors"></div>
       </div>
@@ -71,14 +40,19 @@ export function EventCard({ data, isFeatured = false }: EventCardProps) {
         
         {/* Rodapé: Autor/Categoria */}
         <div className="mt-4 pt-4 border-t border-white/10">
-          {renderCardFooter()}
+          {author && category && (
+            <div className="flex text-xs space-x-2">
+              <span className="font-bold border-r border-white/50 pr-2">BY {author.toUpperCase()}</span>
+              <span className="text-pink-400">{category.toUpperCase()}</span>
+            </div>
+          )}
         </div>
 
         {/* Informações de Destaque (ex: Data no card do meio) - Exemplo */}
-        {isFeatured && (
-            <div className="absolute top-4 right-4 bg-pink-600 px-3 py-1 rounded-full text-xs font-bold">
-                21 JULY
-            </div>
+        {isFeatured && date && (
+          <div className="absolute top-4 right-4 bg-pink-600 px-3 py-1 rounded-full text-xs font-bold">
+            {date}
+          </div>
         )}
       </div>
     </div>
