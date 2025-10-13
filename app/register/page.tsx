@@ -1,8 +1,8 @@
-import { LoginForm } from "@/components/login/LoginForm";
+import { RegisterForm } from "../../components/register/RegisterForm";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
-export default function LoginPage() {
+export default function RegisterPage() {
   return (
     <div 
       className="relative grid lg:grid-cols-5 w-full h-screen"
@@ -24,9 +24,9 @@ export default function LoginPage() {
         <span className="text-sm font-medium">Voltar</span>
       </Link>
       
-      <div className="col-span-2 flex items-center justify-center p-8 lg:p-12 bg-">
+      <div className="col-span-2 flex items-center justify-center p-8 lg:p-12">
         <div className="w-full max-w-sm bg-neutral-900/70 backdrop-blur-md rounded-4xl shadow-lg">
-          <LoginForm />
+          <RegisterForm />
         </div>
       </div>
 
@@ -41,7 +41,7 @@ export default function LoginPage() {
             textShadow: '0 0 10px rgba(139, 92, 246, 0.7)'
           }}
         >
-          CONECTE! CURTA! COLALÁ! 
+          CADASTRE-SE! CONECTE! CURTA!
         </h2>
       </div>
     </div>

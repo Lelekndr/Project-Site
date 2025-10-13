@@ -39,7 +39,7 @@ export function Header() {
             className="px-4 py-1 bg-transparent border border-white hover:border-pink-400 hover:text-pink-400 transition-colors rounded-full text-white" 
             variant="outline"
         >
-            <a href="/cadastro">Cadastre-se</a>
+            <a href="/register">Cadastre-se</a>
         </Button>
 
         <button className="md:hidden">
