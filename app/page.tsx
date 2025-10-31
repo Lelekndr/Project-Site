@@ -3,12 +3,11 @@
 import { useState } from 'react';
 import { Header } from '@/components/ui/common/Header';
 import { SearchBar } from '@/components/ui/common/SearchBar';
-import { CategoryNav } from '@/components/ui/common/CategoryNav';
 import { FeaturedEventsSwiper } from '@/components/ui/SwiperEvents';
 import { EventCatalog } from '@/components/ui/EventCatalog';
 import { Footer } from '@/components/ui/common/Footer';
 import { featuredEvents } from '@/lib/events';
-import { CategoryData } from '@/events';
+import { CategoryData } from '@/lib/events';
 
 
 const categories: CategoryData[] = [

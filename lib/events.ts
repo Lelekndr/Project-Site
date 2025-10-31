@@ -9,6 +9,12 @@ export interface EventData {
   link: string;
 }
 
+// Define a estrutura para os dados da Categoria
+export interface CategoryData {
+  name: string;
+  slug: string;
+}
+
 export const featuredEvents: EventData[] = [
   {
     id: 1,

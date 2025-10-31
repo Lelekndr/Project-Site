@@ -6,12 +6,15 @@ import { Button } from '@/components/ui/button';
 import { featuredEvents } from '@/lib/events';
 
 interface EventPageProps {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
-export default function EventPage({ params }: EventPageProps) {
+export default async function EventPage({ params }: EventPageProps) {
+  // Await params em Next.js 15
+  const { id } = await params;
+  
   // Validação mais robusta do ID
-  const eventId = parseInt(params.id);
+  const eventId = parseInt(id);
   
   // Verifica se o ID é um número válido
   if (isNaN(eventId) || eventId <= 0) {

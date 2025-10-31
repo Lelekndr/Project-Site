@@ -2,13 +2,16 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, EffectCoverflow } from 'swiper/modules';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { EventCard } from '../Card/EventCard';
-import { EventData } from '@/events';
+import { EventData } from '@/lib/events';
 
 interface FeaturedEventsSwiperProps {
   events: EventData[];
 }
 
 export function FeaturedEventsSwiper({ events }: FeaturedEventsSwiperProps) {
+  // Limita a apenas 6 eventos para o carrossel
+  const carouselEvents = events.slice(0, 6);
+  
   return (
     <div className="relative min-h-[400px]">
       <Swiper
@@ -16,7 +19,7 @@ export function FeaturedEventsSwiper({ events }: FeaturedEventsSwiperProps) {
         effect={'coverflow'}
         centeredSlides={true}
         slidesPerView={'auto'}
-        spaceBetween={30}
+        spaceBetween={40}
         loop={false}
         watchSlidesProgress={true}
         coverflowEffect={{
@@ -32,7 +35,7 @@ export function FeaturedEventsSwiper({ events }: FeaturedEventsSwiperProps) {
         }}
         className="mySwiper !pb-20"
       >
-        {events.map((event) => (
+        {carouselEvents.map((event) => (
           <SwiperSlide
             key={event.id}
             className="!w-[300px] md:!w-[350px] !h-[400px] transition-all duration-300"

@@ -1,4 +1,4 @@
-import { EventData } from '@/events';
+import { EventData } from '@/lib/events';
 import Image from 'next/image';
 import Link from 'next/link';
 

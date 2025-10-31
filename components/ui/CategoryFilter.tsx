@@ -1,0 +1,30 @@
+import { Button } from '@/components/ui/button';
+import { CategoryData } from '@/lib/events';
+
+interface CategoryFilterProps {
+  categories: CategoryData[];
+  activeCategory: string;
+  onCategoryChange: (category: string) => void;
+}
+
+export function CategoryFilter({ categories, activeCategory, onCategoryChange }: CategoryFilterProps) {
+  return (
+    <div className="flex flex-wrap justify-center gap-3 mb-12">
+      {categories.map((category) => (
+        <Button
+          key={category.slug}
+          onClick={() => onCategoryChange(category.slug)}
+          className={`
+            px-6 py-2 rounded-full text-sm font-medium transition-all duration-200
+            ${activeCategory === category.slug
+              ? 'bg-pink-600 text-white shadow-lg hover:bg-pink-700'
+              : 'bg-white/10 text-white/70 hover:bg-white/20 border border-white/20'}
+          `}
+          variant="ghost"
+        >
+          {category.name}
+        </Button>
+      ))}
+    </div>
+  );
+}
