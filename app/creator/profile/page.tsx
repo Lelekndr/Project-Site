@@ -1,40 +1,22 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import { useAuth } from '@/contexts/AuthContext';
-import { User, Mail, Calendar, Settings, X, Camera, Save, MapPin } from 'lucide-react';
+import { User, Mail, Calendar, Settings, X, Camera, Save, MapPin, Star, Eye, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Header } from '@/components/ui/common/Header';
 import { Footer } from '@/components/ui/common/Footer';
 import { ProtectedRoute } from '@/components/ui/common/ProtectedRoute';
 
-export default function UserProfilePage() {
+export default function CreatorProfilePage() {
   const { user, updateUserProfile } = useAuth();
   const [showConfigModal, setShowConfigModal] = useState(false);
   const [editingName, setEditingName] = useState(user?.name || '');
   const [editingImage, setEditingImage] = useState(user?.avatar || '');
-  const [editingBio, setEditingBio] = useState('Usuário apaixonado por eventos incríveis');
+  const [editingBio, setEditingBio] = useState('Criador de eventos apaixonado por experiências memoráveis');
   const [editingLocation, setEditingLocation] = useState('São Paulo, SP');
   const [isLoading, setIsLoading] = useState(false);
-  
-  // Estados para preferências
-  const [emailNotifications, setEmailNotifications] = useState(true);
-  const [recommendedEvents, setRecommendedEvents] = useState(true);
-  const [eventReminders, setEventReminders] = useState(false);
-
-  // Carregar preferências salvas
-  useEffect(() => {
-    if (typeof window !== 'undefined' && user?.id) {
-      const savedPreferences = localStorage.getItem(`user_preferences_${user.id}`);
-      if (savedPreferences) {
-        const preferences = JSON.parse(savedPreferences);
-        setEmailNotifications(preferences.emailNotifications ?? true);
-        setRecommendedEvents(preferences.recommendedEvents ?? true);
-        setEventReminders(preferences.eventReminders ?? false);
-      }
-    }
-  }, [user?.id]);
 
   // Sincronizar o estado quando o usuário mudar ou quando o modal abrir
   const openConfigModal = () => {
@@ -70,21 +52,8 @@ export default function UserProfilePage() {
     }
   };
 
-  const handlePreferenceChange = (preference: string, value: boolean) => {
-    // Salvar preferências no localStorage
-    if (typeof window !== 'undefined') {
-      const preferences = {
-        emailNotifications,
-        recommendedEvents,
-        eventReminders,
-        [preference]: value
-      };
-      localStorage.setItem(`user_preferences_${user?.id}`, JSON.stringify(preferences));
-    }
-  };
-
   return (
-    <ProtectedRoute requiredRole="user">
+    <ProtectedRoute requiredRole="creator">
       <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
         <Header />
         
@@ -117,15 +86,15 @@ export default function UserProfilePage() {
                       <MapPin className="w-4 h-4 mr-2" />
                       {editingLocation}
                     </div>
-                    <p className="text-white/80 text-lg max-w-md mb-4">{editingBio}</p>
-                    <div className="flex items-center gap-4">
-                      <div className="inline-flex items-center px-3 py-1 rounded-full bg-blue-600/20 text-blue-400 text-sm">
-                        <User className="w-3 h-3 mr-1" />
-                        Usuário
+                    <p className="text-white/80 text-lg max-w-md">{editingBio}</p>
+                    <div className="flex items-center gap-4 mt-4">
+                      <div className="inline-flex items-center px-3 py-1 rounded-full bg-purple-600/20 text-purple-400 text-sm">
+                        <Star className="w-3 h-3 mr-1" />
+                        Criador Verificado
                       </div>
                       <div className="flex items-center text-white/60 text-sm">
                         <Calendar className="w-4 h-4 mr-1" />
-                        Membro desde Out 2024
+                        Membro desde Oct 2024
                       </div>
                     </div>
                   </div>
@@ -142,68 +111,67 @@ export default function UserProfilePage() {
               </div>
             </div>
 
-            {/* Estatísticas do Usuário */}
+            {/* Estatísticas do Criador */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-              <div className="bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20 text-center">
-                <div className="w-12 h-12 bg-purple-600/20 rounded-lg flex items-center justify-center mx-auto mb-3">
-                  <Calendar className="w-6 h-6 text-purple-400" />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-1">8</h3>
-                <p className="text-white/70 text-sm">Eventos Inscritos</p>
-              </div>
-              <div className="bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20 text-center">
-                <div className="w-12 h-12 bg-green-600/20 rounded-lg flex items-center justify-center mx-auto mb-3">
-                  <Calendar className="w-6 h-6 text-green-400" />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-1">5</h3>
-                <p className="text-white/70 text-sm">Eventos Participados</p>
-              </div>
               <div className="bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20 text-center">
                 <div className="w-12 h-12 bg-blue-600/20 rounded-lg flex items-center justify-center mx-auto mb-3">
                   <Calendar className="w-6 h-6 text-blue-400" />
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-1">3</h3>
-                <p className="text-white/70 text-sm">Próximos Eventos</p>
+                <h3 className="text-2xl font-bold text-white mb-1">12</h3>
+                <p className="text-white/70 text-sm">Eventos Criados</p>
               </div>
+              
+              <div className="bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20 text-center">
+                <div className="w-12 h-12 bg-green-600/20 rounded-lg flex items-center justify-center mx-auto mb-3">
+                  <Users className="w-6 h-6 text-green-400" />
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-1">2.4K</h3>
+                <p className="text-white/70 text-sm">Total de Participantes</p>
+              </div>
+              
               <div className="bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20 text-center">
                 <div className="w-12 h-12 bg-yellow-600/20 rounded-lg flex items-center justify-center mx-auto mb-3">
-                  <Calendar className="w-6 h-6 text-yellow-400" />
+                  <Star className="w-6 h-6 text-yellow-400" />
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-1">Tecnologia</h3>
-                <p className="text-white/70 text-sm">Categoria Favorita</p>
+                <h3 className="text-2xl font-bold text-white mb-1">4.8</h3>
+                <p className="text-white/70 text-sm">Avaliação Média</p>
+              </div>
+              
+              <div className="bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20 text-center">
+                <div className="w-12 h-12 bg-purple-600/20 rounded-lg flex items-center justify-center mx-auto mb-3">
+                  <Eye className="w-6 h-6 text-purple-400" />
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-1">15.2K</h3>
+                <p className="text-white/70 text-sm">Visualizações Totais</p>
               </div>
             </div>
 
             {/* Seções de Conteúdo */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              {/* Atividade Recente */}
+              {/* Eventos Recentes */}
               <div className="lg:col-span-2">
                 <div className="bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20">
-                  <h3 className="text-lg font-semibold text-white mb-6">Atividade Recente</h3>
+                  <div className="flex items-center justify-between mb-6">
+                    <h2 className="text-xl font-bold text-white">Eventos Recentes</h2>
+                    <Button 
+                      className="bg-purple-600 hover:bg-purple-700 text-white text-sm px-4 py-2"
+                      onClick={() => window.location.href = '/creator/events'}
+                    >
+                      Ver Todos
+                    </Button>
+                  </div>
                   
                   <div className="space-y-4">
-                    <div className="flex items-center gap-3 p-3 bg-white/5 rounded-lg">
-                      <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                      <div className="flex-1">
-                        <p className="text-white text-sm">Participou do <span className="font-medium">Festival de Jazz</span></p>
-                        <p className="text-white/60 text-xs">2 dias atrás</p>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-center gap-3 p-3 bg-white/5 rounded-lg">
-                      <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
-                      <div className="flex-1">
-                        <p className="text-white text-sm">Se inscreveu em <span className="font-medium">Workshop de Desenvolvimento</span></p>
-                        <p className="text-white/60 text-xs">5 dias atrás</p>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-center gap-3 p-3 bg-white/5 rounded-lg">
-                      <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
-                      <div className="flex-1">
-                        <p className="text-white text-sm">Avaliou o evento <span className="font-medium">Stand Up Comedy Night</span></p>
-                        <p className="text-white/60 text-xs">1 semana atrás</p>
-                      </div>
+                    {/* Lista de eventos será implementada */}
+                    <div className="text-center py-8">
+                      <Calendar className="w-12 h-12 text-white/30 mx-auto mb-3" />
+                      <p className="text-white/50">Seus eventos aparecerão aqui</p>
+                      <Button 
+                        className="mt-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
+                        onClick={() => window.location.href = '/creator/create'}
+                      >
+                        Criar Primeiro Evento
+                      </Button>
                     </div>
                   </div>
                 </div>
@@ -211,77 +179,44 @@ export default function UserProfilePage() {
 
               {/* Painel Lateral */}
               <div className="space-y-6">
-                {/* Preferências */}
+                {/* Performance */}
                 <div className="bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20">
-                  <h3 className="text-lg font-semibold text-white mb-4">Preferências</h3>
-                  <div className="space-y-4">
+                  <h3 className="text-lg font-semibold text-white mb-4">Performance Este Mês</h3>
+                  <div className="space-y-3">
                     <div className="flex justify-between items-center">
-                      <span className="text-white/70 text-sm">Notificações por Email</span>
-                      <button
-                        onClick={() => {
-                          setEmailNotifications(!emailNotifications);
-                          handlePreferenceChange('emailNotifications', !emailNotifications);
-                        }}
-                        className={`w-12 h-6 rounded-full flex items-center px-1 transition-colors ${
-                          emailNotifications ? 'bg-purple-600' : 'bg-gray-600'
-                        }`}
-                      >
-                        <div className={`w-4 h-4 bg-white rounded-full transition-transform ${
-                          emailNotifications ? 'translate-x-6' : 'translate-x-0'
-                        }`}></div>
-                      </button>
+                      <span className="text-white/70 text-sm">Novos Seguidores</span>
+                      <span className="text-green-400 font-medium">+127</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-white/70 text-sm">Eventos Recomendados</span>
-                      <button
-                        onClick={() => {
-                          setRecommendedEvents(!recommendedEvents);
-                          handlePreferenceChange('recommendedEvents', !recommendedEvents);
-                        }}
-                        className={`w-12 h-6 rounded-full flex items-center px-1 transition-colors ${
-                          recommendedEvents ? 'bg-purple-600' : 'bg-gray-600'
-                        }`}
-                      >
-                        <div className={`w-4 h-4 bg-white rounded-full transition-transform ${
-                          recommendedEvents ? 'translate-x-6' : 'translate-x-0'
-                        }`}></div>
-                      </button>
+                      <span className="text-white/70 text-sm">Taxa de Conversão</span>
+                      <span className="text-blue-400 font-medium">68%</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-white/70 text-sm">Lembretes de Eventos</span>
-                      <button
-                        onClick={() => {
-                          setEventReminders(!eventReminders);
-                          handlePreferenceChange('eventReminders', !eventReminders);
-                        }}
-                        className={`w-12 h-6 rounded-full flex items-center px-1 transition-colors ${
-                          eventReminders ? 'bg-purple-600' : 'bg-gray-600'
-                        }`}
-                      >
-                        <div className={`w-4 h-4 bg-white rounded-full transition-transform ${
-                          eventReminders ? 'translate-x-6' : 'translate-x-0'
-                        }`}></div>
-                      </button>
+                      <span className="text-white/70 text-sm">Receita Gerada</span>
+                      <span className="text-yellow-400 font-medium">R$ 8.4K</span>
                     </div>
                   </div>
                 </div>
 
-                {/* Informações Adicionais */}
+                {/* Próximas Ações */}
                 <div className="bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20">
-                  <h3 className="text-lg font-semibold text-white mb-4">Resumo da Conta</h3>
+                  <h3 className="text-lg font-semibold text-white mb-4">Ações Recomendadas</h3>
                   <div className="space-y-3">
-                    <div className="flex justify-between items-center">
-                      <span className="text-white/70 text-sm">Membro desde</span>
-                      <span className="text-white text-sm">Out 2024</span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-white/70 text-sm">Categoria Favorita</span>
-                      <span className="text-white text-sm">Tecnologia</span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-white/70 text-sm">Últimas Atividades</span>
-                      <span className="text-white text-sm">2 dias atrás</span>
-                    </div>
+                    <Button 
+                      className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white justify-start"
+                      onClick={() => window.location.href = '/creator/create'}
+                    >
+                      <Calendar className="w-4 h-4 mr-2" />
+                      Criar Novo Evento
+                    </Button>
+                    <Button 
+                      variant="outline" 
+                      className="w-full border-white/20 text-white hover:bg-white/10 justify-start"
+                      onClick={() => window.location.href = '/creator/events'}
+                    >
+                      <Eye className="w-4 h-4 mr-2" />
+                      Analisar Métricas
+                    </Button>
                   </div>
                 </div>
               </div>
@@ -364,7 +299,7 @@ export default function UserProfilePage() {
                       onChange={(e) => setEditingBio(e.target.value)}
                       rows={3}
                       className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none"
-                      placeholder="Conte um pouco sobre você..."
+                      placeholder="Conte sobre você..."
                     />
                   </div>
 

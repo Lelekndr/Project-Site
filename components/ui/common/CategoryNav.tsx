@@ -1,15 +1,7 @@
-import { CategoryData } from '@/lib/events';
+import { getAvailableCategories } from '@/lib/events';
 import { Button } from '@/components/ui/button'; // Importação do shadcn Button
 
-const categories: CategoryData[] = [
-  // ... (dados das categorias)
-  { name: 'ALL', slug: 'all' },
-  { name: 'STAND UP COMEDY', slug: 'stand-up' },
-  { name: 'EVENTOS PET', slug: 'pet-events' },
-  { name: 'FESTAS & SHOWS', slug: 'parties-shows' },
-  { name: 'TEATROS', slug: 'theater' },
-  { name: 'ESPORTES', slug: 'sports' },
-];
+const categories = getAvailableCategories();
 
 interface CategoryNavProps {
     activeCategory: string;

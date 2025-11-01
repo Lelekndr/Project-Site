@@ -32,15 +32,15 @@ export function RegisterForm() {
   };
 
   return (
-    <div className="p-8 space-y-6">
+    <div className="p-4 sm:p-8 space-y-4 sm:space-y-6 max-w-md mx-auto w-full">
       <div className="text-center space-y-2">
-        <h1 className="text-2xl font-bold text-white">Criar Conta</h1>
-        <p className="text-gray-300 text-sm">
+        <h1 className="text-xl sm:text-2xl font-bold text-white">Criar Conta</h1>
+        <p className="text-gray-300 text-xs sm:text-sm">
           Preencha os dados para se cadastrar
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
         <TextField
           id="name"
           name="name"
@@ -87,7 +87,7 @@ export function RegisterForm() {
 
         <Button 
           type="submit"
-          className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-medium py-2.5 rounded-lg transition-all duration-200 transform hover:scale-[1.02]"
+          className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-medium py-3 sm:py-3.5 rounded-lg transition-all duration-200 transform hover:scale-[1.02] text-sm sm:text-base min-h-[48px]"
         >
           Criar Conta
         </Button>

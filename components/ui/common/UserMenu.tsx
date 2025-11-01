@@ -1,4 +1,5 @@
 import { User, LogOut, Settings, PlusCircle } from 'lucide-react';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { User as UserType } from '@/types/auth';
 import {
@@ -18,8 +19,20 @@ export function UserMenu({ user, onLogout }: UserMenuProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="text-white hover:text-pink-400 hover:bg-transparent">
-          <User className="w-4 h-4 mr-2" />
+        <Button variant="ghost" className="text-white hover:text-pink-400 hover:bg-transparent flex items-center gap-2">
+          <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center overflow-hidden">
+            {user.avatar ? (
+              <Image 
+                src={user.avatar} 
+                alt={user.name} 
+                width={32}
+                height={32}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <User className="w-4 h-4 text-white" />
+            )}
+          </div>
           {user.name}
         </Button>
       </DropdownMenuTrigger>
