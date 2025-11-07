@@ -12,18 +12,32 @@ interface EventCatalogProps {
   categories: CategoryData[];
   activeCategory: string;
   onCategoryChange: (category: string) => void;
+  searchTerm?: string;
 }
 
 export function EventCatalog({ 
   categories, 
   activeCategory, 
-  onCategoryChange 
+  onCategoryChange,
+  searchTerm = ''
 }: EventCatalogProps) {
   const [visibleEvents, setVisibleEvents] = useState(12);
 
   const filteredEvents = useMemo(() => {
-    return getEventsByCategory(activeCategory);
-  }, [activeCategory]);
+    const eventsByCategory = getEventsByCategory(activeCategory);
+    
+    if (!searchTerm.trim()) {
+      return eventsByCategory;
+    }
+    
+    const searchLower = searchTerm.toLowerCase();
+    return eventsByCategory.filter(event => 
+      event.title.toLowerCase().includes(searchLower) ||
+      event.subtitle?.toLowerCase().includes(searchLower) ||
+      event.author.toLowerCase().includes(searchLower) ||
+      event.category.toLowerCase().includes(searchLower)
+    );
+  }, [activeCategory, searchTerm]);
 
   const handleLoadMore = () => {
     setVisibleEvents(prev => prev + 12);

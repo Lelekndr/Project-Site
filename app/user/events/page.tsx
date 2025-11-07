@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
-import { Calendar, MapPin, Clock, Users, Trash2, Eye, X } from 'lucide-react';
+import { Calendar, MapPin, Clock, Users, Trash2, Eye, X, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Header } from '@/components/ui/common/Header';
 import { Footer } from '@/components/ui/common/Footer';
@@ -26,6 +26,7 @@ interface UserEvent {
 export default function UserEventsPage() {
   const { user } = useAuth();
   const [selectedEvent, setSelectedEvent] = useState<UserEvent | null>(null);
+  const [searchTerm, setSearchTerm] = useState('');
   const [userEvents, setUserEvents] = useState<UserEvent[]>([
     {
       id: 1,
@@ -91,9 +92,21 @@ export default function UserEventsPage() {
     setSelectedEvent(null);
   };
 
+  // Filtrar eventos por busca
+  const filteredEvents = userEvents.filter(event => {
+    if (!searchTerm.trim()) return true;
+    
+    const searchLower = searchTerm.toLowerCase();
+    return event.title.toLowerCase().includes(searchLower) ||
+           event.subtitle?.toLowerCase().includes(searchLower) ||
+           event.category.toLowerCase().includes(searchLower) ||
+           event.location.toLowerCase().includes(searchLower) ||
+           event.description.toLowerCase().includes(searchLower);
+  });
+
   return (
     <ProtectedRoute requiredRole="user">
-      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
+      <div className="min-h-screen bg-gradient-to-br from-violet-900 via-purple-900 to-black">
         <Header />
         
         <div className="container mx-auto px-4 py-12">
@@ -148,19 +161,43 @@ export default function UserEventsPage() {
 
           {/* Lista de eventos */}
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-white mb-6">Meus Eventos</h2>
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+              <h2 className="text-2xl font-bold text-white">Meus Eventos</h2>
+              
+              {/* Campo de busca */}
+              <div className="relative max-w-md w-full sm:w-auto">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <Search className="h-5 w-5 text-white/50" />
+                </div>
+                <input
+                  type="text"
+                  placeholder="Buscar eventos..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full bg-white/10 border border-white/20 rounded-lg pl-10 pr-4 py-2 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                />
+              </div>
+            </div>
             
-            {userEvents.length === 0 ? (
+            {filteredEvents.length === 0 ? (
               <div className="text-center py-12">
                 <div className="text-6xl mb-4">🎟️</div>
-                <h3 className="text-xl font-semibold text-white mb-2">Nenhum evento encontrado</h3>
-                <p className="text-white/70 mb-6">Você ainda não se inscreveu em nenhum evento.</p>
-                <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-3 rounded-full font-medium">
-                  Explorar Eventos
-                </Button>
+                <h3 className="text-xl font-semibold text-white mb-2">
+                  {searchTerm.trim() ? 'Nenhum evento encontrado' : 'Nenhum evento encontrado'}
+                </h3>
+                <p className="text-white/70 mb-6">
+                  {searchTerm.trim() 
+                    ? `Nenhum evento corresponde à busca "${searchTerm}"` 
+                    : 'Você ainda não se inscreveu em nenhum evento.'}
+                </p>
+                {!searchTerm.trim() && (
+                  <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-3 rounded-full font-medium">
+                    Explorar Eventos
+                  </Button>
+                )}
               </div>
             ) : (
-              userEvents.map((event) => (
+              filteredEvents.map((event) => (
                 <div 
                   key={event.id}
                   className="bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20 hover:bg-white/20 transition-colors group"

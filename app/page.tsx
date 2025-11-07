@@ -12,12 +12,17 @@ const categories = getAvailableCategories();
 
 export default function HomePage() {
   const [activeCategory, setActiveCategory] = useState('all');
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearch = (term: string) => {
+    setSearchTerm(term);
+  };
 
   return (
     <div className="colala-background min-h-screen">
       <Header />
       <div className="container mx-auto px-0 sm:px-4">
-        <SearchBar />
+        <SearchBar onSearch={handleSearch} />
         <div className="relative py-8 sm:py-12">
           <FeaturedEventsSwiper events={featuredEvents} />
         </div>
@@ -27,6 +32,7 @@ export default function HomePage() {
         categories={categories}
         activeCategory={activeCategory}
         onCategoryChange={setActiveCategory}
+        searchTerm={searchTerm}
       />
       
       <Footer />

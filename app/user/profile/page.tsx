@@ -85,7 +85,7 @@ export default function UserProfilePage() {
 
   return (
     <ProtectedRoute requiredRole="user">
-      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
+      <div className="min-h-screen bg-gradient-to-br from-violet-900 via-purple-900 to-black">
         <Header />
         
         <div className="container mx-auto px-4 py-12">

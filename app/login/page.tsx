@@ -7,8 +7,8 @@ export default function LoginPage() {
     <div 
       className="relative grid lg:grid-cols-5 w-full min-h-screen"
       style={{ 
-        background: '#9333ea',
-        backgroundImage: 'linear-gradient(135deg, #9333ea 0%, #ec4899 50%, #2563eb 100%)',
+        background: '#4c1d95',
+        backgroundImage: 'linear-gradient(135deg, #4c1d95 0%, #6b21a8 25%, #581c87 75%, #000000 100%)',
         width: '100vw',
         minHeight: '100vh',
         position: 'fixed',

@@ -8,9 +8,7 @@
 }
 
 .colala-background {
-  background: radial-gradient(circle at top left, rgba(255, 0, 150, 0.2) 0%, transparent 40%),
-              radial-gradient(circle at bottom right, rgba(0, 100, 255, 0.3) 0%, transparent 60%),
-              #121212;
+  background: linear-gradient(135deg, #4c1d95 0%, #6b21a8 25%, #581c87 75%, #000000 100%);
   background-size: cover;
   min-height: 100vh;
 }
@@ -18,9 +16,7 @@
 /* Mobile-specific optimizations */
 @media (max-width: 768px) {
   .colala-background {
-    background: radial-gradient(circle at top left, rgba(255, 0, 150, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at bottom right, rgba(0, 100, 255, 0.2) 0%, transparent 70%),
-                #121212;
+    background: linear-gradient(135deg, #4c1d95 0%, #6b21a8 25%, #581c87 75%, #000000 100%);
   }
 }
 

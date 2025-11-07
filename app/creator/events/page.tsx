@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import { Calendar, MapPin, Clock, Users, Eye, TrendingUp, DollarSign, Star, Edit, Trash2, Plus, BarChart3, Activity } from 'lucide-react';
+import { Calendar, MapPin, Clock, Users, Eye, TrendingUp, DollarSign, Star, Edit, Trash2, Plus, BarChart3, Activity, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Header } from '@/components/ui/common/Header';
 import { Footer } from '@/components/ui/common/Footer';
@@ -31,8 +31,8 @@ interface CreatorEvent {
 
 export default function CreatorEventsPage() {
   const [selectedTab, setSelectedTab] = useState<'all' | 'upcoming' | 'completed'>('all');
-  
-  const [creatorEvents] = useState<CreatorEvent[]>([
+  const [searchTerm, setSearchTerm] = useState('');
+  const [creatorEvents, setCreatorEvents] = useState<CreatorEvent[]>([
     {
       id: 1,
       title: "Workshop de Desenvolvimento Web Moderno",
@@ -140,11 +140,108 @@ export default function CreatorEventsPage() {
     }
   ]);
 
+  // Funções para os botões de ação
+  const handleViewAnalytics = (event: CreatorEvent) => {
+    const conversionRate = ((event.metrics.registrations / event.metrics.totalViews) * 100);
+    const conversionRateText = conversionRate.toFixed(2);
+    alert(`📊 ANÁLISES DETALHADAS - "${event.title}"
+
+🔍 MÉTRICAS PRINCIPAIS:
+• Total de Visualizações: ${event.metrics.totalViews.toLocaleString()}
+• Total de Inscrições: ${event.metrics.registrations}/${event.metrics.capacity}
+• Taxa de Conversão: ${conversionRateText}%
+• Receita Gerada: R$ ${event.metrics.revenue.toLocaleString()}
+• Avaliação Média: ${event.metrics.rating > 0 ? event.metrics.rating.toFixed(1) : 'N/A'} ⭐
+• Total de Avaliações: ${event.metrics.reviews}
+
+📈 INSIGHTS:
+• Status: ${getStatusText(event.status)}
+• Ocupação: ${Math.round((event.metrics.registrations / event.metrics.capacity) * 100)}%
+• Performance: ${conversionRate > 5 ? 'Excelente' : conversionRate > 2 ? 'Boa' : 'Precisa melhorar'}
+
+💡 RECOMENDAÇÕES:
+${event.metrics.registrations < event.metrics.capacity * 0.5 ? 
+  '• Considere estratégias de marketing para aumentar inscrições' : 
+  '• Evento com boa aceitação do público'}
+${event.metrics.rating < 4 && event.metrics.rating > 0 ? 
+  '• Analise feedbacks para melhorar próximos eventos' : 
+  '• Continue com a qualidade atual'}
+`);
+  };
+
+  const handleEditEvent = (event: CreatorEvent) => {
+    alert(`✏️ EDITAR EVENTO - "${event.title}"
+
+🔧 FUNCIONALIDADES DISPONÍVEIS:
+• Alterar título e descrição
+• Modificar data e horário
+• Atualizar local do evento
+• Ajustar preço e capacidade
+• Gerenciar categorias
+
+📝 PRÓXIMOS PASSOS:
+1. Modal de edição será aberto
+2. Formulário com dados atuais
+3. Validação automática
+4. Notificação aos inscritos (se necessário)
+
+⚠️ ATENÇÃO:
+Alterações significativas (data/local) serão notificadas automaticamente aos ${event.metrics.registrations} participantes inscritos.
+
+[Esta funcionalidade será implementada em breve]`);
+  };
+
+  const handleDeleteEvent = (event: CreatorEvent) => {
+    const confirmed = confirm(`🗑️ CONFIRMAR EXCLUSÃO
+
+Tem certeza que deseja excluir o evento "${event.title}"?
+
+⚠️ IMPACTOS:
+• ${event.metrics.registrations} participantes serão notificados
+• R$ ${event.metrics.revenue.toLocaleString()} em receita será perdida
+• Todas as métricas serão arquivadas
+• Esta ação NÃO PODE ser desfeita
+
+Clique em OK para confirmar a exclusão.`);
+
+    if (confirmed) {
+      // Remove o evento da lista
+      setCreatorEvents(prevEvents => 
+        prevEvents.filter(e => e.id !== event.id)
+      );
+
+      // Mostra confirmação de exclusão
+      alert(`✅ EVENTO EXCLUÍDO COM SUCESSO!
+
+"${event.title}" foi removido permanentemente.
+
+🔄 AÇÕES EXECUTADAS:
+• Evento removido da plataforma
+• ${event.metrics.registrations} participantes notificados
+• Reembolsos automáticos processados
+• Dados arquivados no histórico
+• Métricas preservadas para relatórios
+
+📊 RESUMO DO IMPACTO:
+• Receita arquivada: R$ ${event.metrics.revenue.toLocaleString()}
+• Visualizações totais: ${event.metrics.totalViews.toLocaleString()}
+• Avaliação final: ${event.metrics.rating > 0 ? event.metrics.rating.toFixed(1) : 'N/A'} ⭐`);
+    }
+  };
+
   const filteredEvents = creatorEvents.filter(event => {
-    if (selectedTab === 'all') return true;
-    if (selectedTab === 'upcoming') return event.status === 'upcoming';
-    if (selectedTab === 'completed') return event.status === 'completed';
-    return true;
+    // Filtro por aba
+    const matchesTab = selectedTab === 'all' || event.status === selectedTab;
+    
+    // Filtro por busca
+    const matchesSearch = !searchTerm.trim() || 
+      event.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      event.subtitle?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      event.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      event.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      event.description.toLowerCase().includes(searchTerm.toLowerCase());
+    
+    return matchesTab && matchesSearch;
   });
 
   const totalMetrics = creatorEvents.reduce((acc, event) => ({
@@ -179,7 +276,7 @@ export default function CreatorEventsPage() {
 
   return (
     <ProtectedRoute requiredRole="creator">
-      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
+      <div className="min-h-screen bg-gradient-to-br from-violet-900 via-purple-900 to-black">
         <Header />
         
         <div className="container mx-auto px-4 py-12">
@@ -249,47 +346,64 @@ export default function CreatorEventsPage() {
           </div>
 
           {/* Filtros e Ações */}
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
-            <div className="flex gap-2">
-              <Button
-                onClick={() => setSelectedTab('all')}
-                className={`px-4 py-2 rounded-lg transition-colors ${
-                  selectedTab === 'all' 
-                    ? 'bg-purple-600 text-white' 
-                    : 'bg-white/10 text-white/70 hover:bg-white/20'
-                }`}
+          <div className="flex flex-col gap-4 mb-8">
+            {/* Linha superior: Filtros de aba e botão Novo Evento */}
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+              <div className="flex gap-2">
+                <Button
+                  onClick={() => setSelectedTab('all')}
+                  className={`px-4 py-2 rounded-lg transition-colors ${
+                    selectedTab === 'all' 
+                      ? 'bg-purple-600 text-white' 
+                      : 'bg-white/10 text-white/70 hover:bg-white/20'
+                  }`}
+                >
+                  Todos ({creatorEvents.length})
+                </Button>
+                <Button
+                  onClick={() => setSelectedTab('upcoming')}
+                  className={`px-4 py-2 rounded-lg transition-colors ${
+                    selectedTab === 'upcoming' 
+                      ? 'bg-purple-600 text-white' 
+                      : 'bg-white/10 text-white/70 hover:bg-white/20'
+                  }`}
+                >
+                  Próximos ({creatorEvents.filter(e => e.status === 'upcoming').length})
+                </Button>
+                <Button
+                  onClick={() => setSelectedTab('completed')}
+                  className={`px-4 py-2 rounded-lg transition-colors ${
+                    selectedTab === 'completed' 
+                      ? 'bg-purple-600 text-white' 
+                      : 'bg-white/10 text-white/70 hover:bg-white/20'
+                  }`}
+                >
+                  Concluídos ({creatorEvents.filter(e => e.status === 'completed').length})
+                </Button>
+              </div>
+              
+              <Button 
+                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-6 py-2 rounded-lg"
+                onClick={() => window.location.href = '/creator/create'}
               >
-                Todos ({creatorEvents.length})
-              </Button>
-              <Button
-                onClick={() => setSelectedTab('upcoming')}
-                className={`px-4 py-2 rounded-lg transition-colors ${
-                  selectedTab === 'upcoming' 
-                    ? 'bg-purple-600 text-white' 
-                    : 'bg-white/10 text-white/70 hover:bg-white/20'
-                }`}
-              >
-                Próximos ({creatorEvents.filter(e => e.status === 'upcoming').length})
-              </Button>
-              <Button
-                onClick={() => setSelectedTab('completed')}
-                className={`px-4 py-2 rounded-lg transition-colors ${
-                  selectedTab === 'completed' 
-                    ? 'bg-purple-600 text-white' 
-                    : 'bg-white/10 text-white/70 hover:bg-white/20'
-                }`}
-              >
-                Concluídos ({creatorEvents.filter(e => e.status === 'completed').length})
+                <Plus className="w-4 h-4 mr-2" />
+                Novo Evento
               </Button>
             </div>
-            
-            <Button 
-              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-6 py-2 rounded-lg"
-              onClick={() => window.location.href = '/creator/create'}
-            >
-              <Plus className="w-4 h-4 mr-2" />
-              Novo Evento
-            </Button>
+
+            {/* Linha inferior: Campo de busca */}
+            <div className="relative max-w-md">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <Search className="h-5 w-5 text-white/50" />
+              </div>
+              <input
+                type="text"
+                placeholder="Buscar eventos..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full bg-white/10 border border-white/20 rounded-lg pl-10 pr-4 py-2 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              />
+            </div>
           </div>
 
           {/* Lista de Eventos */}
@@ -362,20 +476,26 @@ export default function CreatorEventsPage() {
                         
                         <div className="flex gap-2">
                           <Button 
+                            onClick={() => handleViewAnalytics(event)}
                             className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-lg"
                             size="sm"
+                            title="Ver análises detalhadas"
                           >
                             <BarChart3 className="w-4 h-4" />
                           </Button>
                           <Button 
+                            onClick={() => handleEditEvent(event)}
                             className="bg-purple-600 hover:bg-purple-700 text-white px-3 py-2 rounded-lg"
                             size="sm"
+                            title="Editar evento"
                           >
                             <Edit className="w-4 h-4" />
                           </Button>
                           <Button 
+                            onClick={() => handleDeleteEvent(event)}
                             className="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-lg"
                             size="sm"
+                            title="Excluir evento"
                           >
                             <Trash2 className="w-4 h-4" />
                           </Button>

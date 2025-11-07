@@ -40,7 +40,7 @@ export function ProtectedRoute({
   // Mostrar loading durante verificação inicial
   if (!isHydrated || isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-violet-900 via-purple-900 to-black flex items-center justify-center">
         <div className="text-center text-white">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-pink-500 mx-auto mb-4"></div>
           <p>Verificando acesso...</p>
@@ -52,7 +52,7 @@ export function ProtectedRoute({
   // Se não estiver autenticado, mostrar página de fallback
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900 flex items-center justify-center px-4">
+      <div className="min-h-screen bg-gradient-to-br from-violet-900 via-purple-900 to-black flex items-center justify-center px-4">
         <div className="max-w-md w-full text-center">
           <div className="bg-white/10 backdrop-blur-md rounded-lg p-8 border border-white/20">
             <div className="text-6xl mb-6">🔒</div>
@@ -84,7 +84,7 @@ export function ProtectedRoute({
   // Se tiver role específico requerido e o usuário não tiver o role correto
   if (requiredRole && user?.role !== requiredRole) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900 flex items-center justify-center px-4">
+      <div className="min-h-screen bg-gradient-to-br from-violet-900 via-purple-900 to-black flex items-center justify-center px-4">
         <div className="max-w-md w-full text-center">
           <div className="bg-white/10 backdrop-blur-md rounded-lg p-8 border border-white/20">
             <div className="text-6xl mb-6">⛔</div>
