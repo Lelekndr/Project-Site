@@ -183,14 +183,6 @@ export default function UserProfilePage() {
                   
                   <div className="space-y-4">
                     <div className="flex items-center gap-3 p-3 bg-white/5 rounded-lg">
-                      <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                      <div className="flex-1">
-                        <p className="text-white text-sm">Participou do <span className="font-medium">Festival de Jazz</span></p>
-                        <p className="text-white/60 text-xs">2 dias atrás</p>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-center gap-3 p-3 bg-white/5 rounded-lg">
                       <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
                       <div className="flex-1">
                         <p className="text-white text-sm">Se inscreveu em <span className="font-medium">Workshop de Desenvolvimento</span></p>

@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
-import { User } from '@/types/auth';
+import { User, TEST_CREDENTIALS } from '@/types/auth';
 
 interface AuthContextType {
   user: User | null;
@@ -47,29 +47,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       setIsLoading(true);
       
-      // Mock de usuários para demonstração
-      const users = [
-        { id: '1', name: 'Admin', email: 'admin@test.com', password: 'admin123456', role: 'admin' as const },
-        { id: '2', name: 'Criador', email: 'criador@test.com', password: 'creator123456', role: 'creator' as const },
-        { id: '3', name: 'Usuário', email: 'usuario@test.com', password: 'user123456', role: 'user' as const }
-      ];
-
-      const foundUser = users.find(u => u.email === email && u.password === password);
+      // Usar as credenciais de teste que incluem CNPJ
+      const credentials = Object.values(TEST_CREDENTIALS);
+      const foundCredential = credentials.find(cred => cred.email === email && cred.password === password);
       
-      if (foundUser) {
-        const userWithoutPassword = {
-          id: foundUser.id,
-          name: foundUser.name,
-          email: foundUser.email,
-          role: foundUser.role
-        };
-        
-        setUser(userWithoutPassword);
+      if (foundCredential) {
+        setUser(foundCredential.userData);
         
         if (typeof window !== 'undefined') {
-          localStorage.setItem('user', JSON.stringify(userWithoutPassword));
+          localStorage.setItem('user', JSON.stringify(foundCredential.userData));
           // Também salvar em cookie para o middleware
-          document.cookie = `user=${JSON.stringify(userWithoutPassword)}; path=/; max-age=86400`; // 24 horas
+          document.cookie = `user=${JSON.stringify(foundCredential.userData)}; path=/; max-age=86400`; // 24 horas
         }
         
         return true;

@@ -5,18 +5,72 @@
 
 :root {
   --radius: 0.625rem;
+  
+  /* Tema Escuro (padrão) */
+  --background: 260 10% 5%;
+  --foreground: 0 0% 98%;
+  --card: 260 10% 8%;
+  --card-foreground: 0 0% 95%;
+  --popover: 260 10% 8%;
+  --popover-foreground: 0 0% 95%;
+  --primary: 262 83% 58%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 260 3% 11%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 260 3% 11%;
+  --muted-foreground: 0 0% 63%;
+  --accent: 260 3% 11%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 260 3% 18%;
+  --input: 260 3% 18%;
+  --ring: 262 83% 58%;
+}
+
+/* Tema Claro */
+.light {
+  --background: 0 0% 100%;
+  --foreground: 260 10% 5%;
+  --card: 0 0% 100%;
+  --card-foreground: 260 10% 5%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 260 10% 5%;
+  --primary: 262 83% 58%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 260 4% 96%;
+  --secondary-foreground: 260 6% 12%;
+  --muted: 260 4% 96%;
+  --muted-foreground: 260 3% 40%;
+  --accent: 260 4% 96%;
+  --accent-foreground: 260 6% 12%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 260 6% 92%;
+  --input: 260 6% 92%;
+  --ring: 262 83% 58%;
 }
 
 .colala-background {
-  background: linear-gradient(135deg, #4c1d95 0%, #6b21a8 25%, #581c87 75%, #000000 100%);
-  background-size: cover;
+  /* Tema Escuro */
+  background: var(--theme-bg-primary);
   min-height: 100vh;
+  transition: background 0.3s ease;
+}
+
+/* Tema Claro */
+.light .colala-background {
+  background: var(--theme-bg-primary);
 }
 
 /* Mobile-specific optimizations */
 @media (max-width: 768px) {
   .colala-background {
-    background: linear-gradient(135deg, #4c1d95 0%, #6b21a8 25%, #581c87 75%, #000000 100%);
+    background: var(--theme-bg-primary);
+  }
+  
+  .light .colala-background {
+    background: var(--theme-bg-primary);
   }
 }
 
@@ -100,4 +154,300 @@ html {
   .mySwiper {
     padding-bottom: 5rem !important;
   }
+}
+
+/* Tema escuro - cores vibrantes roxo/rosa */
+.dark {
+  --theme-bg-primary: #4c1d95;
+  --theme-bg-secondary: #6b21a8;
+  --theme-bg-card: #581c87;
+  --theme-bg-card-hover: #7e22ce;
+  --theme-bg-overlay: rgba(76, 29, 149, 0.95);
+  --theme-gradient: linear-gradient(135deg, #4c1d95 0%, #6b21a8 25%, #581c87 50%, #7e22ce 75%, #ec4899 100%);
+  --theme-text-primary: #ffffff;
+  --theme-text-secondary: #f3e8ff;
+  --theme-text-muted: #e9d5ff;
+  --theme-border: #a855f7;
+  --theme-purple: #c084fc;
+  --theme-pink: #f472b6;
+  --theme-success: #4ade80;
+  --theme-warning: #fcd34d;
+  --theme-error: #f87171;
+  --theme-blue: #60a5fa;
+}
+
+/* Tema claro - tons suaves das mesmas cores */
+.light {
+  --theme-bg-primary: #faf7ff;
+  --theme-bg-secondary: #f3e8ff;
+  --theme-bg-card: #e9d5ff;
+  --theme-bg-card-hover: #ddd6fe;
+  --theme-bg-overlay: rgba(250, 247, 255, 0.95);
+  --theme-gradient: linear-gradient(135deg, #faf7ff 0%, #f3e8ff 25%, #e9d5ff 50%, #ddd6fe 75%, #c4b5fd 100%);
+  --theme-text-primary: #4c1d95;
+  --theme-text-secondary: #6b21a8;
+  --theme-text-muted: #7c3aed;
+  --theme-border: #c4b5fd;
+  --theme-purple: #8b5cf6;
+  --theme-pink: #d946ef;
+  --theme-success: #059669;
+  --theme-warning: #d97706;
+  --theme-error: #dc2626;
+  --theme-blue: #0369a1;
+}
+
+/* Classes utilitárias para temas */
+.theme-bg-primary {
+  background-color: var(--theme-bg-primary);
+}
+
+.theme-bg-secondary {
+  background-color: var(--theme-bg-secondary);
+}
+
+.theme-bg-card {
+  background-color: var(--theme-bg-card);
+}
+
+.theme-bg-card-hover {
+  background-color: var(--theme-bg-card-hover);
+}
+
+.theme-bg-card:hover {
+  background-color: var(--theme-bg-card-hover);
+}
+
+.theme-bg-overlay {
+  background-color: var(--theme-bg-overlay);
+}
+
+.theme-text-primary {
+  color: var(--theme-text-primary);
+}
+
+.theme-text-secondary {
+  color: var(--theme-text-secondary);
+}
+
+.theme-text-muted {
+  color: var(--theme-text-muted);
+}
+
+.theme-border {
+  border-color: var(--theme-border);
+}
+
+.theme-purple {
+  color: var(--theme-purple);
+}
+
+.theme-pink {
+  color: var(--theme-pink);
+}
+
+.theme-success {
+  color: var(--theme-success);
+}
+
+.theme-warning {
+  color: var(--theme-warning);
+}
+
+.theme-error {
+  color: var(--theme-error);
+}
+
+.theme-blue {
+  color: var(--theme-blue);
+}
+
+/* Backgrounds com cores temáticas */
+.theme-bg-purple {
+  background-color: var(--theme-purple);
+}
+
+.theme-bg-pink {
+  background-color: var(--theme-pink);
+}
+
+.theme-bg-success {
+  background-color: var(--theme-success);
+}
+
+.theme-bg-warning {
+  background-color: var(--theme-warning);
+}
+
+.theme-bg-error {
+  background-color: var(--theme-error);
+}
+
+.theme-bg-blue {
+  background-color: var(--theme-blue);
+}
+
+/* ===== ESTILOS DE ACESSIBILIDADE ===== */
+
+/* Focus visível para navegação por teclado */
+.focus-visible,
+*:focus-visible {
+  outline: 2px solid #3b82f6 !important;
+  outline-offset: 2px !important;
+  border-radius: 4px;
+}
+
+/* Skip links para navegação rápida */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: #3b82f6;
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 4px;
+  z-index: 1000;
+  font-weight: 500;
+  transform: translateY(-100%);
+  transition: transform 0.3s;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+  top: 6px;
+}
+
+/* Screen reader only text */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ===== ALTO CONTRASTE ===== */
+.accessibility-high-contrast {
+  /* Cores de alto contraste */
+  --theme-text-primary: #000000;
+  --theme-text-secondary: #1a1a1a;
+  --theme-text-muted: #333333;
+  --theme-bg-card: #ffffff;
+  --theme-bg-card-hover: #f0f0f0;
+  --theme-bg-glass: #ffffff;
+  --theme-border: #000000;
+  --theme-purple: #4c1d95;
+  --theme-pink: #be185d;
+  --theme-success: #14532d;
+  --theme-warning: #d97706;
+  --theme-error: #dc2626;
+  --theme-blue: #1d4ed8;
+}
+
+.accessibility-high-contrast .colala-background {
+  background: #ffffff !important;
+}
+
+.accessibility-high-contrast * {
+  border-color: #000000 !important;
+}
+
+.accessibility-high-contrast button,
+.accessibility-high-contrast .bg-pink-600,
+.accessibility-high-contrast .theme-bg-pink {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #000000 !important;
+}
+
+.accessibility-high-contrast button:hover,
+.accessibility-high-contrast .bg-pink-700:hover,
+.accessibility-high-contrast .theme-bg-purple:hover {
+  background-color: #333333 !important;
+}
+
+/* ===== TEXTO GRANDE ===== */
+.accessibility-large-text {
+  font-size: 1.25rem !important;
+}
+
+.accessibility-large-text h1 {
+  font-size: 3rem !important;
+}
+
+.accessibility-large-text h2 {
+  font-size: 2.5rem !important;
+}
+
+.accessibility-large-text h3 {
+  font-size: 2rem !important;
+}
+
+.accessibility-large-text p,
+.accessibility-large-text span,
+.accessibility-large-text button,
+.accessibility-large-text input {
+  font-size: 1.25rem !important;
+  line-height: 1.6 !important;
+}
+
+.accessibility-large-text .text-xs {
+  font-size: 1rem !important;
+}
+
+.accessibility-large-text .text-sm {
+  font-size: 1.125rem !important;
+}
+
+.accessibility-large-text .text-base {
+  font-size: 1.25rem !important;
+}
+
+.accessibility-large-text .text-lg {
+  font-size: 1.5rem !important;
+}
+
+/* ===== MOVIMENTO REDUZIDO ===== */
+.accessibility-reduced-motion,
+.accessibility-reduced-motion * {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  transform: none !important;
+}
+
+.accessibility-reduced-motion .swiper-slide {
+  transition: none !important;
+}
+
+.accessibility-reduced-motion .hover\:scale-105:hover,
+.accessibility-reduced-motion .active\:scale-95:active {
+  transform: none !important;
+}
+
+/* ===== MELHORIAS DE CONTRASTE PARA ELEMENTOS ESPECÍFICOS ===== */
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+a:focus-visible {
+  outline: 3px solid #3b82f6 !important;
+  outline-offset: 2px !important;
+}
+
+/* Melhor contraste para placeholders */
+input::placeholder,
+textarea::placeholder {
+  opacity: 0.7;
+  color: #6b7280;
+}
+
+.accessibility-high-contrast input::placeholder,
+.accessibility-high-contrast textarea::placeholder {
+  color: #000000 !important;
+  opacity: 1 !important;
 }

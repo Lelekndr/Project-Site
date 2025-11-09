@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import { useAuth } from '@/contexts/AuthContext';
-import { Calendar, MapPin, Clock, Users, Trash2, Eye, X, Search } from 'lucide-react';
+import { Calendar, MapPin, Clock, Users, Eye, X, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Header } from '@/components/ui/common/Header';
 import { Footer } from '@/components/ui/common/Footer';
@@ -17,16 +16,23 @@ interface UserEvent {
   location: string;
   registered: boolean;
   attended: boolean;
+  participationConfirmed?: boolean;
   category: string;
   description: string;
   price: string;
   organizer: string;
+  rating?: number;
 }
 
 export default function UserEventsPage() {
-  const { user } = useAuth();
   const [selectedEvent, setSelectedEvent] = useState<UserEvent | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [showRatingModal, setShowRatingModal] = useState(false);
+  const [eventToRate, setEventToRate] = useState<UserEvent | null>(null);
+  const [currentRating, setCurrentRating] = useState(0);
+  const [hoverRating, setHoverRating] = useState(0);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [eventToConfirm, setEventToConfirm] = useState<UserEvent | null>(null);
   const [userEvents, setUserEvents] = useState<UserEvent[]>([
     {
       id: 1,
@@ -64,25 +70,58 @@ export default function UserEventsPage() {
       time: "14:00",
       location: "TechHub",
       registered: true,
-      attended: false,
+      attended: true,
       category: "Tecnologia",
       description: "Workshop prático para desenvolvedores que querem dominar as tecnologias mais modernas do desenvolvimento web.",
       price: "R$ 120,00",
-      organizer: "Dev Academy"
+      organizer: "Dev Academy",
+      rating: 5
+    },
+    {
+      id: 4,
+      title: "Meetup de UX/UI Design",
+      subtitle: "Tendências e melhores práticas em design de interfaces",
+      date: "20 de Outubro, 2025",
+      time: "19:00",
+      location: "Design Center",
+      registered: true,
+      attended: false,
+      category: "Design",
+      description: "Meetup para designers compartilharem experiências e conhecimentos sobre UX/UI.",
+      price: "Gratuito",
+      organizer: "UX Community"
+    },
+    {
+      id: 5,
+      title: "Workshop de Fotografia Digital",
+      subtitle: "Técnicas avançadas de fotografia com smartphone",
+      date: "25 de Outubro, 2025",
+      time: "14:00",
+      location: "Estúdio Foto Pro",
+      registered: true,
+      attended: false,
+      category: "Arte",
+      description: "Workshop prático sobre técnicas de fotografia digital para iniciantes e intermediários.",
+      price: "R$ 65,00",
+      organizer: "Foto Pro Academy"
+    },
+    {
+      id: 6,
+      title: "Conferência de Marketing Digital 2025",
+      subtitle: "As últimas tendências do marketing online",
+      date: "1 de Novembro, 2025",
+      time: "09:00",
+      location: "Centro de Convenções",
+      registered: true,
+      attended: false,
+      category: "Negócios",
+      description: "Conferência com especialistas em marketing digital e growth hacking.",
+      price: "R$ 150,00",
+      organizer: "Marketing Pro"
     }
   ]);
 
-  const handleRemoveEvent = (eventId: number) => {
-    if (confirm('Tem certeza que deseja remover este evento da sua lista?')) {
-      const updatedEvents = userEvents.filter(event => event.id !== eventId);
-      setUserEvents(updatedEvents);
-      
-      // Salvar no localStorage
-      if (typeof window !== 'undefined') {
-        localStorage.setItem(`user_events_${user?.id}`, JSON.stringify(updatedEvents));
-      }
-    }
-  };
+
 
   const handleViewEvent = (event: UserEvent) => {
     setSelectedEvent(event);
@@ -90,6 +129,55 @@ export default function UserEventsPage() {
 
   const closeEventModal = () => {
     setSelectedEvent(null);
+  };
+
+  // Função para verificar se o evento já ocorreu
+  const isEventPast = (eventDate: string) => {
+    const today = new Date();
+    const currentMonth = today.getMonth() + 1; // Janeiro é 0
+    const currentDay = today.getDate();
+    
+    // Parse da data do evento (formato: "DD de MMMM, YYYY")
+    const monthNames = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+      "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+    
+    const dateParts = eventDate.split(' ');
+    const eventDay = parseInt(dateParts[0]);
+    const eventMonthName = dateParts[2].replace(',', '');
+    const eventMonth = monthNames.indexOf(eventMonthName) + 1;
+    
+    // Comparar se o evento já passou (assumindo que estamos em novembro/2025)
+    if (eventMonth < currentMonth) {
+      return true;
+    } else if (eventMonth === currentMonth && eventDay < currentDay) {
+      return true;
+    }
+    return false;
+  };
+
+  // Função para confirmar participação
+  const handleConfirmParticipation = (event: UserEvent) => {
+    setEventToConfirm(event);
+    setShowConfirmModal(true);
+  };
+
+  // Função para confirmar a participação definitivamente
+  const confirmParticipation = () => {
+    if (eventToConfirm) {
+      setUserEvents(prev => prev.map(event => 
+        event.id === eventToConfirm.id 
+          ? { ...event, participationConfirmed: true, attended: true }
+          : event
+      ));
+      setShowConfirmModal(false);
+      setEventToConfirm(null);
+    }
+  };
+
+  // Função para fechar modal de confirmação
+  const closeConfirmModal = () => {
+    setShowConfirmModal(false);
+    setEventToConfirm(null);
   };
 
   // Filtrar eventos por busca
@@ -106,27 +194,27 @@ export default function UserEventsPage() {
 
   return (
     <ProtectedRoute requiredRole="user">
-      <div className="min-h-screen bg-gradient-to-br from-violet-900 via-purple-900 to-black">
+      <div className="min-h-screen">
         <Header />
         
         <div className="container mx-auto px-4 py-12">
           {/* Header da página */}
           <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-white mb-4">
+            <h1 className="text-4xl font-bold theme-text-primary mb-4">
               Meus Eventos
             </h1>
-            <p className="text-white/70 text-lg max-w-2xl mx-auto">
+            <p className="theme-text-secondary text-lg max-w-2xl mx-auto">
               Acompanhe todos os eventos que você se inscreveu e seu histórico de participação
             </p>
           </div>
 
           {/* Estatísticas */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            <div className="bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20">
+            <div className="theme-bg-card backdrop-blur-md rounded-lg p-6 border theme-border">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-white/70 text-sm">Eventos Inscritos</p>
-                  <p className="text-2xl font-bold text-white">
+                  <p className="theme-text-secondary text-sm">Eventos Inscritos</p>
+                  <p className="text-2xl font-bold theme-text-primary">
                     {userEvents.filter(e => e.registered).length}
                   </p>
                 </div>
@@ -134,27 +222,27 @@ export default function UserEventsPage() {
               </div>
             </div>
             
-            <div className="bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20">
+            <div className="theme-bg-card backdrop-blur-md rounded-lg p-6 border theme-border">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-white/70 text-sm">Participações</p>
-                  <p className="text-2xl font-bold text-white">
+                  <p className="theme-text-secondary text-sm">Participações</p>
+                  <p className="text-2xl font-bold theme-text-primary">
                     {userEvents.filter(e => e.attended).length}
                   </p>
                 </div>
-                <Users className="w-8 h-8 text-green-400" />
+                <Users className="w-8 h-8 theme-success" />
               </div>
             </div>
             
-            <div className="bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20">
+            <div className="theme-bg-card backdrop-blur-md rounded-lg p-6 border theme-border">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-white/70 text-sm">Próximos Eventos</p>
-                  <p className="text-2xl font-bold text-white">
+                  <p className="theme-text-secondary text-sm">Próximos Eventos</p>
+                  <p className="text-2xl font-bold theme-text-primary">
                     {userEvents.filter(e => e.registered && !e.attended).length}
                   </p>
                 </div>
-                <Clock className="w-8 h-8 text-purple-400" />
+                <Clock className="w-8 h-8 theme-purple" />
               </div>
             </div>
           </div>
@@ -162,7 +250,7 @@ export default function UserEventsPage() {
           {/* Lista de eventos */}
           <div className="space-y-6">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-              <h2 className="text-2xl font-bold text-white">Meus Eventos</h2>
+              <h2 className="text-2xl font-bold theme-text-primary">Meus Eventos</h2>
               
               {/* Campo de busca */}
               <div className="relative max-w-md w-full sm:w-auto">
@@ -237,11 +325,20 @@ export default function UserEventsPage() {
                           Inscrito
                         </span>
                       )}
-                      {event.attended && (
-                        <span className="px-3 py-1 bg-blue-600/30 text-blue-300 text-sm rounded-full">
-                          Participou
-                        </span>
+                      {event.participationConfirmed && (
+                        <div className="flex items-center gap-2">
+                          <span className="px-3 py-1 bg-emerald-600/30 text-emerald-300 text-sm rounded-full">
+                            Participação Confirmada
+                          </span>
+                          {event.rating && (
+                            <div className="flex items-center gap-1 px-2 py-1 bg-yellow-600/20 text-yellow-400 text-sm rounded-full">
+                              <span>⭐</span>
+                              <span>{event.rating}</span>
+                            </div>
+                          )}
+                        </div>
                       )}
+                      {/* Badge de participação removido para evitar conflito com confirmação */}
                       
                       <div className="flex gap-2">
                         <Button 
@@ -251,13 +348,30 @@ export default function UserEventsPage() {
                         >
                           <Eye className="w-4 h-4" />
                         </Button>
-                        <Button 
-                          onClick={() => handleRemoveEvent(event.id)}
-                          className="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-lg"
-                          size="sm"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </Button>
+                        {isEventPast(event.date) && event.registered && !event.participationConfirmed && (
+                          <Button 
+                            onClick={() => handleConfirmParticipation(event)}
+                            className="bg-green-600 hover:bg-green-700 text-white px-3 py-2 rounded-lg"
+                            size="sm"
+                            title="Confirmar participação"
+                          >
+                            ✓
+                          </Button>
+                        )}
+                        {event.participationConfirmed && (
+                          <Button 
+                            onClick={() => {
+                              setEventToRate(event);
+                              setCurrentRating(event.rating || 0);
+                              setShowRatingModal(true);
+                            }}
+                            className="bg-yellow-600 hover:bg-yellow-700 text-white px-3 py-2 rounded-lg"
+                            size="sm"
+                            title="Avaliar evento"
+                          >
+                            ⭐
+                          </Button>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -343,11 +457,7 @@ export default function UserEventsPage() {
                           Inscrito
                         </span>
                       )}
-                      {selectedEvent.attended && (
-                        <span className="px-3 py-1 bg-blue-600/30 text-blue-300 text-sm rounded-full">
-                          Participou
-                        </span>
-                      )}
+                      {/* Badge de participou removido */}
                     </div>
                   </div>
                   
@@ -358,18 +468,153 @@ export default function UserEventsPage() {
                     >
                       Fechar
                     </Button>
-                    <Button
-                      onClick={() => {
-                        handleRemoveEvent(selectedEvent.id);
-                        closeEventModal();
-                      }}
-                      className="bg-red-600 hover:bg-red-700 text-white px-6"
-                    >
-                      <Trash2 className="w-4 h-4 mr-2" />
-                      Remover
-                    </Button>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Modal de Avaliação */}
+        {showRatingModal && eventToRate && (
+          <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+            <div className="bg-gray-900/95 backdrop-blur-md rounded-lg p-8 max-w-md w-full border border-white/20">
+              <div className="text-center">
+                <h3 className="text-2xl font-bold text-white mb-4">Avaliar Evento</h3>
+                <p className="text-white/80 mb-6">
+                  Como foi sua experiência no evento:<br />
+                  <span className="font-semibold text-yellow-400">{eventToRate.title}</span>
+                </p>
+                
+                {/* Sistema de Rating por Estrelas */}
+                <div className="flex justify-center gap-2 mb-6">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <button
+                      key={star}
+                      onClick={() => setCurrentRating(star)}
+                      onMouseEnter={() => setHoverRating(star)}
+                      onMouseLeave={() => setHoverRating(0)}
+                      className="text-4xl transition-colors duration-200 hover:scale-110 transform"
+                    >
+                      <span className={`${
+                        star <= (hoverRating || currentRating) 
+                          ? 'text-yellow-400' 
+                          : 'text-gray-600'
+                      }`}>
+                        ⭐
+                      </span>
+                    </button>
+                  ))}
+                </div>
+                
+                {/* Feedback textual */}
+                <div className="text-white/70 mb-6">
+                  {currentRating === 0 && "Clique nas estrelas para avaliar"}
+                  {currentRating === 1 && "⭐ Muito Ruim"}
+                  {currentRating === 2 && "⭐⭐ Ruim"}
+                  {currentRating === 3 && "⭐⭐⭐ Regular"}
+                  {currentRating === 4 && "⭐⭐⭐⭐ Bom"}
+                  {currentRating === 5 && "⭐⭐⭐⭐⭐ Excelente"}
+                </div>
+                
+                {/* Campo de comentário opcional */}
+                {currentRating > 0 && (
+                  <textarea
+                    placeholder="Deixe um comentário sobre o evento (opcional)"
+                    className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-yellow-500 resize-none mb-6"
+                    rows={3}
+                  />
+                )}
+                
+                <div className="flex space-x-4">
+                  <Button
+                    onClick={() => {
+                      setShowRatingModal(false);
+                      setEventToRate(null);
+                      setCurrentRating(0);
+                      setHoverRating(0);
+                    }}
+                    variant="outline"
+                    className="flex-1 bg-transparent border-white/20 text-white hover:bg-white/10"
+                  >
+                    Cancelar
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      if (currentRating === 0) {
+                        alert('Por favor, selecione uma avaliação antes de enviar.');
+                        return;
+                      }
+                      
+                      // Atualizar a avaliação do evento
+                      setUserEvents(userEvents.map(event => 
+                        event.id === eventToRate.id 
+                          ? { ...event, rating: currentRating }
+                          : event
+                      ));
+                      
+                      alert(`🌟 Avaliação enviada com sucesso!\n\nSua nota: ${currentRating} estrela${currentRating > 1 ? 's' : ''}\n\nObrigado pelo seu feedback!`);
+                      setShowRatingModal(false);
+                      setEventToRate(null);
+                      setCurrentRating(0);
+                      setHoverRating(0);
+                    }}
+                    disabled={currentRating === 0}
+                    className="flex-1 bg-yellow-600 hover:bg-yellow-700 disabled:bg-gray-600 disabled:cursor-not-allowed"
+                  >
+                    Enviar Avaliação
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Modal de Confirmação de Participação */}
+        {showConfirmModal && eventToConfirm && (
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+            <div className="bg-white/10 backdrop-blur-md rounded-lg border border-white/20 p-6 max-w-md w-full">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-xl font-semibold text-white">Confirmar Participação</h3>
+                <Button 
+                  onClick={closeConfirmModal}
+                  className="bg-transparent hover:bg-white/10 text-white p-2"
+                  size="sm"
+                >
+                  <X className="w-4 h-4" />
+                </Button>
+              </div>
+              
+              <div className="mb-6">
+                <h4 className="text-lg font-medium text-white mb-2">{eventToConfirm.title}</h4>
+                <div className="flex items-center gap-4 text-white/70 text-sm mb-4">
+                  <div className="flex items-center gap-1">
+                    <Calendar className="w-4 h-4" />
+                    <span>{eventToConfirm.date}</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <MapPin className="w-4 h-4" />
+                    <span>{eventToConfirm.location}</span>
+                  </div>
+                </div>
+                <p className="text-white/80 text-sm">
+                  Você deseja confirmar que participou deste evento? Esta ação permitirá que você avalie o evento e será registrada em seu histórico.
+                </p>
+              </div>
+              
+              <div className="flex gap-3">
+                <Button 
+                  onClick={closeConfirmModal}
+                  className="flex-1 bg-gray-600 hover:bg-gray-700"
+                >
+                  Cancelar
+                </Button>
+                <Button 
+                  onClick={confirmParticipation}
+                  className="flex-1 bg-green-600 hover:bg-green-700"
+                >
+                  Confirmar Participação
+                </Button>
               </div>
             </div>
           </div>

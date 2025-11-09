@@ -4,7 +4,11 @@ import "./globals.css";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/effect-coverflow";
-import { AuthProvider } from "@/contexts/AuthContext"
+import { AuthProvider } from "@/contexts/AuthContext";
+import { ThemeProvider } from "@/contexts/ThemeContext";
+import { AccessibilityProvider } from "@/contexts/AccessibilityContext";
+import { ThemeWrapper } from "@/components/ui/ThemeWrapper";
+import { AccessibilityPanel } from "@/components/ui/AccessibilityPanel";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,9 +36,16 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         suppressHydrationWarning
       >
-        <AuthProvider>
-          {children}
-        </AuthProvider>
+        <ThemeProvider>
+          <AccessibilityProvider>
+            <AuthProvider>
+              <ThemeWrapper>
+                {children}
+                <AccessibilityPanel />
+              </ThemeWrapper>
+            </AuthProvider>
+          </AccessibilityProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

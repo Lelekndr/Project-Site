@@ -178,7 +178,30 @@ export default function AdminDashboardPage() {
                   </Button>
                 </Link>
                 
-                <Button variant="outline" className="w-full bg-transparent border-white/20 text-white hover:bg-white/10">
+                <Button 
+                  onClick={() => {
+                    alert(`📊 RELATÓRIOS DO SISTEMA
+
+📈 MÉTRICAS PRINCIPAIS:
+• Usuários Ativos: ${stats.totalUsers - 43}
+• Novos Usuários (7 dias): ${stats.newUsersThisWeek}
+• Total de Eventos: ${stats.totalEvents}
+• Eventos Pendentes: ${stats.pendingEvents}
+• Receita Total: R$ ${stats.totalRevenue.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+
+📊 RELATÓRIOS DISPONÍVEIS:
+• Relatório de Usuários (PDF)
+• Relatório de Eventos (Excel)
+• Relatório Financeiro (PDF)
+• Relatório de Performance (Dashboard)
+
+📧 Os relatórios serão enviados para seu email em até 5 minutos.
+
+[Funcionalidade completa será implementada em breve]`);
+                  }}
+                  variant="outline" 
+                  className="w-full bg-transparent border-white/20 text-white hover:bg-white/10"
+                >
                   <BarChart3 className="w-4 h-4 mr-2" />
                   Relatórios
                 </Button>

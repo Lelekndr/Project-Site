@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import { Calendar, MapPin, Clock, Users, Eye, TrendingUp, DollarSign, Star, Edit, Trash2, Plus, BarChart3, Activity, Search } from 'lucide-react';
+import { Calendar, MapPin, Clock, Users, Eye, TrendingUp, DollarSign, Star, Edit, X, Plus, BarChart3, Activity, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Header } from '@/components/ui/common/Header';
 import { Footer } from '@/components/ui/common/Footer';
@@ -32,6 +32,17 @@ interface CreatorEvent {
 export default function CreatorEventsPage() {
   const [selectedTab, setSelectedTab] = useState<'all' | 'upcoming' | 'completed'>('all');
   const [searchTerm, setSearchTerm] = useState('');
+  const [editingEvent, setEditingEvent] = useState<CreatorEvent | null>(null);
+  const [editForm, setEditForm] = useState({
+    title: '',
+    subtitle: '',
+    date: '',
+    time: '',
+    location: '',
+    category: '',
+    description: '',
+    price: ''
+  });
   const [creatorEvents, setCreatorEvents] = useState<CreatorEvent[]>([
     {
       id: 1,
@@ -170,62 +181,71 @@ ${event.metrics.rating < 4 && event.metrics.rating > 0 ?
   };
 
   const handleEditEvent = (event: CreatorEvent) => {
-    alert(`✏️ EDITAR EVENTO - "${event.title}"
-
-🔧 FUNCIONALIDADES DISPONÍVEIS:
-• Alterar título e descrição
-• Modificar data e horário
-• Atualizar local do evento
-• Ajustar preço e capacidade
-• Gerenciar categorias
-
-📝 PRÓXIMOS PASSOS:
-1. Modal de edição será aberto
-2. Formulário com dados atuais
-3. Validação automática
-4. Notificação aos inscritos (se necessário)
-
-⚠️ ATENÇÃO:
-Alterações significativas (data/local) serão notificadas automaticamente aos ${event.metrics.registrations} participantes inscritos.
-
-[Esta funcionalidade será implementada em breve]`);
+    setEditingEvent(event);
+    setEditForm({
+      title: event.title,
+      subtitle: event.subtitle || '',
+      date: event.date,
+      time: event.time,
+      location: event.location,
+      category: event.category,
+      description: event.description,
+      price: event.price
+    });
   };
 
-  const handleDeleteEvent = (event: CreatorEvent) => {
-    const confirmed = confirm(`🗑️ CONFIRMAR EXCLUSÃO
+  const handleSaveEdit = () => {
+    if (!editingEvent) return;
+    
+    setCreatorEvents(creatorEvents.map(event => 
+      event.id === editingEvent.id 
+        ? { ...event, ...editForm }
+        : event
+    ));
+    
+    setEditingEvent(null);
+    alert('Evento atualizado com sucesso!');
+  };
 
-Tem certeza que deseja excluir o evento "${event.title}"?
+  const handleCancelEvent = (event: CreatorEvent) => {
+    const confirmed = confirm(`⚠️ CONFIRMAR CANCELAMENTO
+
+Tem certeza que deseja cancelar o evento "${event.title}"?
 
 ⚠️ IMPACTOS:
 • ${event.metrics.registrations} participantes serão notificados
-• R$ ${event.metrics.revenue.toLocaleString()} em receita será perdida
-• Todas as métricas serão arquivadas
+• R$ ${event.metrics.revenue.toLocaleString()} em receita será reembolsada
+• Evento será marcado como "Cancelado"
 • Esta ação NÃO PODE ser desfeita
 
-Clique em OK para confirmar a exclusão.`);
+Clique em OK para confirmar o cancelamento.`);
 
     if (confirmed) {
-      // Remove o evento da lista
+      // Marca o evento como cancelado ao invés de remover
       setCreatorEvents(prevEvents => 
-        prevEvents.filter(e => e.id !== event.id)
+        prevEvents.map(e => 
+          e.id === event.id 
+            ? { ...e, status: 'cancelled' as 'upcoming' | 'ongoing' | 'completed' | 'cancelled' }
+            : e
+        )
       );
 
-      // Mostra confirmação de exclusão
-      alert(`✅ EVENTO EXCLUÍDO COM SUCESSO!
+      // Mostra confirmação de cancelamento
+      alert(`✅ EVENTO CANCELADO COM SUCESSO!
 
-"${event.title}" foi removido permanentemente.
+"${event.title}" foi cancelado.
 
 🔄 AÇÕES EXECUTADAS:
-• Evento removido da plataforma
+• Evento marcado como cancelado
 • ${event.metrics.registrations} participantes notificados
 • Reembolsos automáticos processados
-• Dados arquivados no histórico
-• Métricas preservadas para relatórios
+• Métricas preservadas para histórico
+• Evento permanece no seu painel
 
-📊 RESUMO DO IMPACTO:
-• Receita arquivada: R$ ${event.metrics.revenue.toLocaleString()}
+📊 RESUMO:
+• Receita reembolsada: R$ ${event.metrics.revenue.toLocaleString()}
 • Visualizações totais: ${event.metrics.totalViews.toLocaleString()}
-• Avaliação final: ${event.metrics.rating > 0 ? event.metrics.rating.toFixed(1) : 'N/A'} ⭐`);
+• Status: Cancelado`);
     }
   };
 
@@ -276,17 +296,17 @@ Clique em OK para confirmar a exclusão.`);
 
   return (
     <ProtectedRoute requiredRole="creator">
-      <div className="min-h-screen bg-gradient-to-br from-violet-900 via-purple-900 to-black">
+      <div className="min-h-screen theme-bg-primary">
         <Header />
         
         <div className="container mx-auto px-4 py-12">
           {/* Header da página */}
           <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-white mb-4">
-              Meus Eventos
+            <h1 className="text-4xl font-bold theme-text-primary mb-4">
+              Meus Eventos Criados
             </h1>
-            <p className="text-white/70 text-lg max-w-2xl mx-auto">
-              Gerencie seus eventos e acompanhe as métricas de performance
+            <p className="theme-text-secondary text-lg max-w-2xl mx-auto">
+              Gerencie todos os seus eventos e acompanhe suas métricas de performance
             </p>
           </div>
 
@@ -492,12 +512,12 @@ Clique em OK para confirmar a exclusão.`);
                             <Edit className="w-4 h-4" />
                           </Button>
                           <Button 
-                            onClick={() => handleDeleteEvent(event)}
+                            onClick={() => handleCancelEvent(event)}
                             className="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-lg"
                             size="sm"
-                            title="Excluir evento"
+                            title="Cancelar evento"
                           >
-                            <Trash2 className="w-4 h-4" />
+                            <X className="w-4 h-4" />
                           </Button>
                         </div>
                       </div>
@@ -571,6 +591,159 @@ Clique em OK para confirmar a exclusão.`);
             </Button>
           </div>
         </div>
+
+        {/* Modal de Edição de Evento */}
+        {editingEvent && (
+          <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+            <div className="bg-gray-900/95 backdrop-blur-md rounded-lg p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-white/20">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-bold text-white">Editar Evento</h2>
+                <button
+                  onClick={() => setEditingEvent(null)}
+                  className="text-white/60 hover:text-white transition-colors"
+                >
+                  ✕
+                </button>
+              </div>
+
+              <div className="space-y-6">
+                {/* Título */}
+                <div>
+                  <label className="block text-white text-sm font-medium mb-2">
+                    Título do Evento
+                  </label>
+                  <input
+                    type="text"
+                    value={editForm.title}
+                    onChange={(e) => setEditForm({ ...editForm, title: e.target.value })}
+                    className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    placeholder="Nome do seu evento"
+                  />
+                </div>
+
+                {/* Subtítulo */}
+                <div>
+                  <label className="block text-white text-sm font-medium mb-2">
+                    Subtítulo
+                  </label>
+                  <input
+                    type="text"
+                    value={editForm.subtitle}
+                    onChange={(e) => setEditForm({ ...editForm, subtitle: e.target.value })}
+                    className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    placeholder="Descrição breve do evento"
+                  />
+                </div>
+
+                {/* Data e Hora */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-white text-sm font-medium mb-2">
+                      Data
+                    </label>
+                    <input
+                      type="text"
+                      value={editForm.date}
+                      onChange={(e) => setEditForm({ ...editForm, date: e.target.value })}
+                      className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      placeholder="Ex: 15 de Novembro, 2025"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-white text-sm font-medium mb-2">
+                      Horário
+                    </label>
+                    <input
+                      type="text"
+                      value={editForm.time}
+                      onChange={(e) => setEditForm({ ...editForm, time: e.target.value })}
+                      className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      placeholder="Ex: 19:00 - 22:00"
+                    />
+                  </div>
+                </div>
+
+                {/* Local */}
+                <div>
+                  <label className="block text-white text-sm font-medium mb-2">
+                    Local
+                  </label>
+                  <input
+                    type="text"
+                    value={editForm.location}
+                    onChange={(e) => setEditForm({ ...editForm, location: e.target.value })}
+                    className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    placeholder="Endereço do evento"
+                  />
+                </div>
+
+                {/* Categoria e Preço */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-white text-sm font-medium mb-2">
+                      Categoria
+                    </label>
+                    <select
+                      value={editForm.category}
+                      onChange={(e) => setEditForm({ ...editForm, category: e.target.value })}
+                      className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    >
+                      <option value="technology">Tecnologia</option>
+                      <option value="music">Música</option>
+                      <option value="education">Educação</option>
+                      <option value="business">Negócios</option>
+                      <option value="sports">Esportes</option>
+                      <option value="art">Arte</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-white text-sm font-medium mb-2">
+                      Preço
+                    </label>
+                    <input
+                      type="text"
+                      value={editForm.price}
+                      onChange={(e) => setEditForm({ ...editForm, price: e.target.value })}
+                      className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      placeholder="Ex: R$ 50,00"
+                    />
+                  </div>
+                </div>
+
+                {/* Descrição */}
+                <div>
+                  <label className="block text-white text-sm font-medium mb-2">
+                    Descrição
+                  </label>
+                  <textarea
+                    value={editForm.description}
+                    onChange={(e) => setEditForm({ ...editForm, description: e.target.value })}
+                    rows={4}
+                    className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none"
+                    placeholder="Descreva seu evento em detalhes"
+                  />
+                </div>
+
+                {/* Botões */}
+                <div className="flex space-x-4 pt-4 border-t border-white/10">
+                  <Button
+                    onClick={() => setEditingEvent(null)}
+                    variant="outline"
+                    className="flex-1 bg-transparent border-white/20 text-white hover:bg-white/10"
+                  >
+                    Cancelar
+                  </Button>
+                  <Button
+                    onClick={handleSaveEdit}
+                    className="flex-1 bg-purple-600 hover:bg-purple-700"
+                  >
+                    Salvar Alterações
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
         
         <Footer />
       </div>

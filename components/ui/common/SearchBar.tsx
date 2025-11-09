@@ -40,11 +40,16 @@ export function SearchBar({ onSearch, placeholder = "Buscar eventos", className 
 
   return (
     <div className={`flex justify-center py-4 sm:py-8 px-4 ${className}`}>
-      <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-stretch sm:items-center w-full max-w-3xl bg-white/100 backdrop-blur-sm rounded-lg p-1 border border-white/70 shadow-lg gap-2 sm:gap-0">
+      <form 
+        onSubmit={handleSubmit} 
+        className="flex flex-col sm:flex-row items-stretch sm:items-center w-full max-w-3xl theme-bg-card backdrop-blur-sm rounded-lg p-1 border theme-border shadow-lg gap-2 sm:gap-0"
+        role="search"
+        aria-label="Buscar eventos"
+      >
         
         {/* Search Input Container */}
         <div className="flex items-center flex-1">
-          <div className="p-2 sm:p-3 text-gray-400">
+          <div className="p-2 sm:p-3 theme-text-muted" aria-hidden="true">
             <Search className="w-4 h-4 sm:w-5 sm:h-5" />
           </div>
           
@@ -53,14 +58,17 @@ export function SearchBar({ onSearch, placeholder = "Buscar eventos", className 
             value={searchTerm}
             onChange={handleInputChange}
             placeholder={placeholder}
-            className="flex-grow bg-transparent p-2 sm:p-3 text-gray-800 placeholder-gray-500 focus-visible:ring-0 border-none h-auto text-base sm:text-lg font-medium"
+            className="flex-grow bg-transparent p-2 sm:p-3 theme-text-primary placeholder:theme-text-muted focus-visible:ring-0 border-none h-auto text-base sm:text-lg font-medium"
+            aria-label="Campo de busca de eventos"
+            id="search-input"
           />
         </div>
         
         {/* Search Button */}
         <Button 
           type="submit"
-          className="bg-pink-600 hover:bg-pink-700 text-white font-medium px-4 sm:px-8 py-2 sm:py-3 rounded-md transition-colors text-sm sm:text-base w-full sm:w-auto min-h-[44px]"
+          className="theme-bg-pink hover:theme-bg-purple theme-text-primary font-medium px-4 sm:px-8 py-2 sm:py-3 rounded-md transition-colors text-sm sm:text-base w-full sm:w-auto min-h-[44px]"
+          aria-label="Pesquisar eventos"
         >
           Pesquisar
         </Button>

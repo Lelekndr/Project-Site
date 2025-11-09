@@ -4,7 +4,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form"; 
-import { Globe } from "lucide-react"; 
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link"; 
 
 import { LoginSchema, LoginFormValues } from "@/lib/schemas"; 
 import { useAuth } from "@/contexts/AuthContext";
@@ -59,7 +60,19 @@ export function LoginForm() {
   };
 
   return (
-    <div className="flex flex-col space-y-4 sm:space-y-6 text-white p-4 sm:p-6 max-w-md mx-auto w-full">
+    <div 
+      className="flex flex-col space-y-3 sm:space-y-4 text-white p-4 sm:p-6 max-w-md mx-auto w-full"
+      role="main"
+      aria-label="Formulário de login"
+    >
+      <Link 
+        href="/" 
+        className="flex items-center space-x-2 text-white/70 hover:text-white transition-colors duration-200 group mb-2 w-fit"
+      >
+        <ArrowLeft className="h-4 w-4 sm:h-5 sm:w-5 group-hover:-translate-x-1 transition-transform duration-200" />
+        <span className="text-xs sm:text-sm font-medium">Voltar</span>
+      </Link>
+      
       <LoginLogo />
       
       <TestCredentials onFillCredentials={fillCredentials} />
@@ -67,26 +80,26 @@ export function LoginForm() {
       <ErrorMessage message={error} />
 
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6">
+        <form 
+          onSubmit={form.handleSubmit(onSubmit)} 
+          className="space-y-3 sm:space-y-4"
+          noValidate
+        >
           <LoginFormFields control={form.control} />
 
           <Button 
             type="submit" 
             className="w-full bg-indigo-700 hover:bg-indigo-600 font-bold py-3 sm:py-4 tracking-wide transition-all duration-200 text-base min-h-[48px]"
-            disabled={isLoading} 
+            disabled={isLoading}
+            aria-describedby={error ? "login-error" : undefined}
           >
             {isLoading ? 'Entrando...' : 'Login'}
           </Button>
         </form>
       </Form>
       
-      <Button 
-        variant="outline" 
-        className="w-full border-2 border-purple-500 text-purple-400 bg-transparent hover:bg-purple-900/20 mt-4 font-bold transition-all duration-200 py-3 sm:py-4 text-base min-h-[48px]"
-      >
-        <Globe className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-        Página do promoter
-      </Button>
+      {/* Espaço extra para garantir acessibilidade no mobile */}
+      <div className="h-4 sm:h-0"></div>
     </div>
   );
 }

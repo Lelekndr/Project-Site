@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import { Shield, Users, Trash2, Eye, UserCheck, UserX, Calendar, MapPin, Crown, User } from 'lucide-react';
+import { Shield, Users, Trash2, Eye, UserCheck, UserX, Calendar, MapPin, Crown, User, Settings } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Header } from '@/components/ui/common/Header';
 import { Footer } from '@/components/ui/common/Footer';
@@ -110,6 +110,14 @@ export default function AdminUsersPage() {
     setSelectedUser(user);
   };
 
+  const handleViewUser = (user: AdminUser) => {
+    setSelectedUser(user);
+  };
+
+  const handleEditUser = (user: AdminUser) => {
+    alert(`Editando usuário: ${user.name}\nFuncionalidade em desenvolvimento...`);
+  };
+
   const filteredUsers = users.filter(user => {
     switch (activeTab) {
       case 'new': return new Date(user.joinDate) > new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
@@ -198,7 +206,8 @@ export default function AdminUsersPage() {
 
             {/* Lista de usuários */}
             <div className="bg-white/10 backdrop-blur-md rounded-lg overflow-hidden border border-white/20">
-              <div className="overflow-x-auto">
+              {/* Desktop View */}
+              <div className="hidden lg:block overflow-x-auto">
                 <table className="w-full">
                   <thead>
                     <tr className="border-b border-white/10">
@@ -294,6 +303,84 @@ export default function AdminUsersPage() {
                     ))}
                   </tbody>
                 </table>
+              </div>
+
+              {/* Mobile View - Cards */}
+              <div className="lg:hidden space-y-4 p-4">
+                {filteredUsers.map((user) => (
+                  <div key={user.id} className="bg-white/5 rounded-lg p-4 border border-white/10">
+                    <div className="flex items-start justify-between mb-3">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-12 h-12 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center">
+                          <span className="text-white font-semibold text-lg">
+                            {user.name.charAt(0)}
+                          </span>
+                        </div>
+                        <div>
+                          <h3 className="text-white font-semibold">{user.name}</h3>
+                          <p className="text-white/60 text-sm">{user.email}</p>
+                          {user.location && (
+                            <div className="flex items-center text-white/50 text-xs mt-1">
+                              <MapPin className="w-3 h-3 mr-1" />
+                              {user.location}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusBadge(user.status)}`}>
+                        {getStatusText(user.status)}
+                      </span>
+                    </div>
+                    
+                    <div className="space-y-2 text-sm mb-4">
+                      <div className="flex justify-between items-center">
+                        <span className="text-white/60">Tipo:</span>
+                        <div className="flex items-center space-x-2">
+                          {getRoleIcon(user.role)}
+                          <span className="text-white/80">{getRoleText(user.role)}</span>
+                        </div>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-white/60">Cadastro:</span>
+                        <span className="text-white"><DateFormatter date={user.joinDate} /></span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-white/60">Último login:</span>
+                        <span className="text-white/70 text-xs">{user.lastLogin}</span>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-wrap gap-2">
+                      <Button 
+                        size="sm" 
+                        variant="outline" 
+                        className="border-blue-500 text-blue-400 hover:bg-blue-500 hover:text-white flex-1 min-w-[70px]"
+                        onClick={() => handleViewUser(user)}
+                      >
+                        <Eye className="w-3 h-3 mr-1" />
+                        Ver
+                      </Button>
+                      <Button 
+                        size="sm" 
+                        variant="outline" 
+                        className="border-green-500 text-green-400 hover:bg-green-500 hover:text-white flex-1 min-w-[70px]"
+                        onClick={() => handleEditUser(user)}
+                      >
+                        <Settings className="w-3 h-3 mr-1" />
+                        Editar
+                      </Button>
+                      <Button 
+                        size="sm" 
+                        variant="outline" 
+                        className="border-red-500 text-red-400 hover:bg-red-500 hover:text-white flex-1 min-w-[70px]"
+                        onClick={() => handleDeleteUser(user.id)}
+                      >
+                        <Trash2 className="w-3 h-3 mr-1" />
+                        Excluir
+                      </Button>
+                    </div>
+                  </div>
+                ))}
               </div>
 
               {filteredUsers.length === 0 && (

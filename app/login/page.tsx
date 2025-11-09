@@ -1,6 +1,4 @@
 import { LoginForm } from "@/components/login/LoginForm";
-import { ArrowLeft } from "lucide-react";
-import Link from "next/link";
 
 export default function LoginPage() {
   return (
@@ -9,23 +7,10 @@ export default function LoginPage() {
       style={{ 
         background: '#4c1d95',
         backgroundImage: 'linear-gradient(135deg, #4c1d95 0%, #6b21a8 25%, #581c87 75%, #000000 100%)',
-        width: '100vw',
-        minHeight: '100vh',
-        position: 'fixed',
-        top: 0,
-        left: 0
       }}
     >
-      <Link 
-        href="/" 
-        className="absolute top-4 left-4 sm:top-6 sm:left-6 lg:top-10 lg:left-15 p-2 sm:p-4 lg:p-7 z-10 flex items-center space-x-2 text-white/70 hover:text-white transition-colors duration-200 group"
-      >
-        <ArrowLeft className="h-4 w-4 sm:h-5 sm:w-5 group-hover:-translate-x-1 transition-transform duration-200" />
-        <span className="text-xs sm:text-sm font-medium">Voltar</span>
-      </Link>
-      
-      <div className="col-span-full lg:col-span-2 flex items-center justify-center p-4 sm:p-6 lg:p-8 xl:p-12 min-h-screen lg:min-h-auto">
-        <div className="w-full max-w-sm bg-neutral-900/70 backdrop-blur-md rounded-2xl sm:rounded-3xl lg:rounded-4xl shadow-lg">
+      <div className="col-span-full lg:col-span-2 flex items-start sm:items-center justify-center p-4 sm:p-6 lg:p-8 xl:p-12 min-h-screen lg:min-h-auto pt-8 sm:pt-4 lg:pt-8 overflow-y-auto">
+        <div className="w-full max-w-sm bg-neutral-900/70 backdrop-blur-md rounded-2xl sm:rounded-3xl lg:rounded-4xl shadow-lg my-4 sm:my-0">
           <LoginForm />
         </div>
       </div>

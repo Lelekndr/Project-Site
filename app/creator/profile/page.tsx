@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { useAuth } from '@/contexts/AuthContext';
-import { User, Mail, Calendar, Settings, X, Camera, Save, MapPin, Star, Eye, Users } from 'lucide-react';
+import { User, Mail, Calendar, Settings, X, Camera, Save, MapPin, Star, Eye, Users, Building } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Header } from '@/components/ui/common/Header';
 import { Footer } from '@/components/ui/common/Footer';
@@ -82,6 +82,12 @@ export default function CreatorProfilePage() {
                       <Mail className="w-4 h-4 mr-2" />
                       {user?.email}
                     </div>
+                    {user?.cnpj && (
+                      <div className="flex items-center text-white/70 mb-2">
+                        <Building className="w-4 h-4 mr-2" />
+                        CNPJ: {user.cnpj}
+                      </div>
+                    )}
                     <div className="flex items-center text-white/70 mb-3">
                       <MapPin className="w-4 h-4 mr-2" />
                       {editingLocation}

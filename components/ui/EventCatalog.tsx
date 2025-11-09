@@ -13,13 +13,15 @@ interface EventCatalogProps {
   activeCategory: string;
   onCategoryChange: (category: string) => void;
   searchTerm?: string;
+  renderSearchBar?: () => React.ReactNode;
 }
 
 export function EventCatalog({ 
   categories, 
   activeCategory, 
   onCategoryChange,
-  searchTerm = ''
+  searchTerm = '',
+  renderSearchBar
 }: EventCatalogProps) {
   const [visibleEvents, setVisibleEvents] = useState(12);
 
@@ -51,6 +53,10 @@ export function EventCatalog({
           subtitle="Descubra os melhores eventos da sua cidade"
         />
       </div>
+
+      {renderSearchBar && (
+        <div className="mb-6">{renderSearchBar()}</div>
+      )}
 
       <CategoryFilter 
         categories={categories}

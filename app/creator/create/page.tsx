@@ -16,10 +16,53 @@ export default function CreatorCreateEventPage() {
     e.preventDefault();
     setIsSubmitting(true);
     
+    // Coleta dados do formulário
+    const formData = new FormData(e.target as HTMLFormElement);
+    const eventData = {
+      name: formData.get('eventName'),
+      description: formData.get('description'),
+      date: formData.get('date'),
+      time: formData.get('time'),
+      location: formData.get('location'),
+      category: formData.get('category'),
+      price: formData.get('price'),
+      capacity: formData.get('capacity')
+    };
+    
+    // Validação básica
+    if (!eventData.name || !eventData.description || !eventData.date) {
+      alert('⚠️ Por favor, preencha todos os campos obrigatórios (Nome, Descrição e Data).');
+      setIsSubmitting(false);
+      return;
+    }
+    
     // Simulação de criação de evento
     setTimeout(() => {
-      alert('Evento criado com sucesso!');
+      alert(`🎉 EVENTO CRIADO COM SUCESSO!
+
+📋 DETALHES DO EVENTO:
+• Nome: ${eventData.name}
+• Data: ${eventData.date} às ${eventData.time || 'horário não especificado'}
+• Local: ${eventData.location || 'online'}
+• Categoria: ${eventData.category || 'geral'}
+• Preço: ${eventData.price || 'gratuito'}
+
+📬 PRÓXIMOS PASSOS:
+1. Seu evento foi enviado para análise
+2. Você receberá um email de confirmação
+3. O evento será publicado em até 24h
+4. Você pode acompanhar o status na aba "Meus Eventos"
+
+Obrigado por usar nossa plataforma! 🚀`);
       setIsSubmitting(false);
+      
+      // Limpar formulário
+      (e.target as HTMLFormElement).reset();
+      
+      // Redirecionar após 3 segundos
+      setTimeout(() => {
+        window.location.href = '/creator/events';
+      }, 3000);
     }, 2000);
   };
 

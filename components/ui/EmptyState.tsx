@@ -5,7 +5,7 @@ interface EmptyStateProps {
 export function EmptyState({ message }: EmptyStateProps) {
   return (
     <div className="text-center py-12">
-      <p className="text-white/70 text-lg">
+      <p className="theme-text-secondary text-lg">
         {message}
       </p>
     </div>

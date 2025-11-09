@@ -1,17 +1,23 @@
+"use client";
+
+import { use, useState } from 'react';
 import { notFound } from 'next/navigation';
 import { ArrowLeft, Calendar, MapPin, Users, Clock } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { featuredEvents } from '@/lib/events';
+import { useAuth } from '@/contexts/AuthContext';
 
 interface EventPageProps {
   params: Promise<{ id: string }>;
 }
 
-export default async function EventPage({ params }: EventPageProps) {
-  // Await params em Next.js 15
-  const { id } = await params;
+export default function EventPage({ params }: EventPageProps) {
+  const [showRegistrationModal, setShowRegistrationModal] = useState(false);
+  const { isAuthenticated } = useAuth();
+  // Usar hook use para awaitar params em Next.js 15
+  const { id } = use(params);
   
   // Validação mais robusta do ID
   const eventId = parseInt(id);
@@ -113,25 +119,28 @@ export default async function EventPage({ params }: EventPageProps) {
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4 sm:pt-6">
               <Button 
+                onClick={() => {
+                  if (!isAuthenticated) {
+                    alert('Você precisa fazer login para se inscrever no evento!');
+                    window.location.href = '/login';
+                  } else {
+                    setShowRegistrationModal(true);
+                  }
+                }}
                 className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-6 sm:px-8 py-3 text-base sm:text-lg font-medium rounded-full transition-all duration-200 transform hover:scale-105 min-h-[48px]"
               >
                 Inscrever-se no Evento
-              </Button>
-              
-              <Button 
-                variant="outline"
-                className="border-2 border-white/20 text-white hover:bg-white/10 px-6 sm:px-8 py-3 text-base sm:text-lg font-medium rounded-full transition-all duration-200 min-h-[48px]"
-              >
-                Compartilhar
               </Button>
             </div>
           </div>
         </div>
 
-        {/* Event Description */}
-        <div className="mt-16 max-w-4xl mx-auto">
-          <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
-            <h2 className="text-2xl font-bold text-white mb-6">Sobre o Evento</h2>
+
+
+      {/* Event Description */}
+      <div className="mt-16 max-w-4xl mx-auto">
+        <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
+          <h2 className="text-2xl font-bold text-white mb-6">Sobre o Evento</h2>
             <div className="prose prose-invert max-w-none">
               <p className="text-white/80 text-lg leading-relaxed mb-4">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor 
@@ -151,6 +160,53 @@ export default async function EventPage({ params }: EventPageProps) {
           </div>
         </div>
       </div>
+
+      {/* Modal de Inscrição */}
+      {showRegistrationModal && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+          <div className="bg-gray-900/95 backdrop-blur-md rounded-lg p-8 max-w-md w-full border border-white/20">
+            <div className="text-center">
+              <h3 className="text-2xl font-bold text-white mb-4">Confirmar Inscrição</h3>
+              <p className="text-white/80 mb-6">
+                Você está se inscrevendo no evento:<br />
+                <span className="font-semibold text-pink-400">{event.title}</span>
+              </p>
+              
+              <div className="space-y-4 text-left mb-6">
+                <div className="bg-white/5 rounded-lg p-4">
+                  <h4 className="text-white font-semibold mb-2">Detalhes da Inscrição:</h4>
+                  <div className="text-sm text-white/70 space-y-1">
+                    <p>• Você receberá um email de confirmação</p>
+                    <p>• Lembrete será enviado 1 dia antes</p>
+                    <p>• Inscrição pode ser cancelada até 24h antes</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="flex space-x-4">
+                <Button
+                  onClick={() => setShowRegistrationModal(false)}
+                  variant="outline"
+                  className="flex-1 bg-transparent border-white/20 text-white hover:bg-white/10"
+                >
+                  Cancelar
+                </Button>
+                <Button
+                  onClick={() => {
+                    alert('🎉 Inscrição realizada com sucesso!\n\nVocê receberá um email de confirmação em breve.');
+                    setShowRegistrationModal(false);
+                  }}
+                  className="flex-1 bg-purple-600 hover:bg-purple-700"
+                >
+                  Confirmar Inscrição
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+
     </div>
   );
 }

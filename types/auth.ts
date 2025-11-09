@@ -6,6 +6,7 @@ export interface User {
   email: string;
   role: UserRole;
   avatar?: string;
+  cnpj?: string; // Para usuários do tipo creator pessoa jurídica
 }
 
 export interface AuthContextType {
@@ -39,10 +40,11 @@ export const TEST_CREDENTIALS = {
     password: 'creator123456',
     userData: {
       id: '2',
-      name: 'Maria Santos',
+      name: 'Eventos Premium Ltda',
       email: 'criador@test.com',
       role: 'creator' as UserRole,
-      avatar: '/images/creator-avatar.jpg'
+      avatar: '/images/creator-avatar.jpg',
+      cnpj: '12.345.678/0001-90'
     }
   },
   admin: {
