@@ -64,10 +64,10 @@ export default function CreatorProfilePage() {
               <div className="flex flex-col md:flex-row items-start justify-between gap-6">
                 <div className="flex flex-col md:flex-row items-start md:items-center gap-6 flex-1">
                   <div className="w-32 h-32 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center overflow-hidden">
-                    {user?.avatar ? (
+                    {(user?.avatar && user.avatar !== '/images/creator-avatar.jpg') || editingImage ? (
                       <Image 
-                        src={user.avatar} 
-                        alt={user.name || 'Avatar'} 
+                        src={editingImage || user?.avatar || ''} 
+                        alt="Avatar do criador" 
                         width={128}
                         height={128}
                         className="w-full h-full object-cover"

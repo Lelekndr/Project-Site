@@ -95,10 +95,10 @@ export default function UserProfilePage() {
               <div className="flex flex-col md:flex-row items-start justify-between gap-6">
                 <div className="flex flex-col md:flex-row items-start md:items-center gap-6 flex-1">
                   <div className="w-32 h-32 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center overflow-hidden">
-                    {user?.avatar ? (
+                    {(user?.avatar && user.avatar !== '/images/user-avatar.jpg') || editingImage ? (
                       <Image 
-                        src={user.avatar} 
-                        alt={user.name || 'Avatar'} 
+                        src={editingImage || user?.avatar || ''} 
+                        alt="Avatar do usuário" 
                         width={128}
                         height={128}
                         className="w-full h-full object-cover"
@@ -214,11 +214,13 @@ export default function UserProfilePage() {
                           setEmailNotifications(!emailNotifications);
                           handlePreferenceChange('emailNotifications', !emailNotifications);
                         }}
-                        className={`w-12 h-6 rounded-full flex items-center px-1 transition-colors ${
-                          emailNotifications ? 'bg-purple-600' : 'bg-gray-600'
+                        className={`w-12 h-6 rounded-full flex items-center px-1 transition-colors border-2 ${
+                          emailNotifications 
+                            ? 'bg-purple-600 border-purple-400' 
+                            : 'bg-gray-700 border-gray-500'
                         }`}
                       >
-                        <div className={`w-4 h-4 bg-white rounded-full transition-transform ${
+                        <div className={`w-4 h-4 bg-white rounded-full transition-transform shadow-md ${
                           emailNotifications ? 'translate-x-6' : 'translate-x-0'
                         }`}></div>
                       </button>
@@ -230,11 +232,13 @@ export default function UserProfilePage() {
                           setRecommendedEvents(!recommendedEvents);
                           handlePreferenceChange('recommendedEvents', !recommendedEvents);
                         }}
-                        className={`w-12 h-6 rounded-full flex items-center px-1 transition-colors ${
-                          recommendedEvents ? 'bg-purple-600' : 'bg-gray-600'
+                        className={`w-12 h-6 rounded-full flex items-center px-1 transition-colors border-2 ${
+                          recommendedEvents 
+                            ? 'bg-purple-600 border-purple-400' 
+                            : 'bg-gray-700 border-gray-500'
                         }`}
                       >
-                        <div className={`w-4 h-4 bg-white rounded-full transition-transform ${
+                        <div className={`w-4 h-4 bg-white rounded-full transition-transform shadow-md ${
                           recommendedEvents ? 'translate-x-6' : 'translate-x-0'
                         }`}></div>
                       </button>
@@ -246,11 +250,13 @@ export default function UserProfilePage() {
                           setEventReminders(!eventReminders);
                           handlePreferenceChange('eventReminders', !eventReminders);
                         }}
-                        className={`w-12 h-6 rounded-full flex items-center px-1 transition-colors ${
-                          eventReminders ? 'bg-purple-600' : 'bg-gray-600'
+                        className={`w-12 h-6 rounded-full flex items-center px-1 transition-colors border-2 ${
+                          eventReminders 
+                            ? 'bg-purple-600 border-purple-400' 
+                            : 'bg-gray-700 border-gray-500'
                         }`}
                       >
-                        <div className={`w-4 h-4 bg-white rounded-full transition-transform ${
+                        <div className={`w-4 h-4 bg-white rounded-full transition-transform shadow-md ${
                           eventReminders ? 'translate-x-6' : 'translate-x-0'
                         }`}></div>
                       </button>

@@ -156,18 +156,18 @@ html {
   }
 }
 
-/* Tema escuro - cores vibrantes roxo/rosa */
+/* Tema escuro - cores mais claras para melhor visibilidade */
 .dark {
   --theme-bg-primary: #4c1d95;
   --theme-bg-secondary: #6b21a8;
-  --theme-bg-card: #581c87;
-  --theme-bg-card-hover: #7e22ce;
+  --theme-bg-card: rgba(139, 92, 246, 0.2);
+  --theme-bg-card-hover: rgba(139, 92, 246, 0.3);
   --theme-bg-overlay: rgba(76, 29, 149, 0.95);
   --theme-gradient: linear-gradient(135deg, #4c1d95 0%, #6b21a8 25%, #581c87 50%, #7e22ce 75%, #ec4899 100%);
   --theme-text-primary: #ffffff;
-  --theme-text-secondary: #f3e8ff;
-  --theme-text-muted: #e9d5ff;
-  --theme-border: #a855f7;
+  --theme-text-secondary: #f1f5f9;
+  --theme-text-muted: #e2e8f0;
+  --theme-border: rgba(139, 92, 246, 0.4);
   --theme-purple: #c084fc;
   --theme-pink: #f472b6;
   --theme-success: #4ade80;
@@ -176,24 +176,24 @@ html {
   --theme-blue: #60a5fa;
 }
 
-/* Tema claro - tons suaves das mesmas cores */
+/* Tema claro - componentes mais escuros para melhor contraste */
 .light {
   --theme-bg-primary: #faf7ff;
   --theme-bg-secondary: #f3e8ff;
-  --theme-bg-card: #e9d5ff;
-  --theme-bg-card-hover: #ddd6fe;
+  --theme-bg-card: rgba(76, 29, 149, 0.12);
+  --theme-bg-card-hover: rgba(76, 29, 149, 0.2);
   --theme-bg-overlay: rgba(250, 247, 255, 0.95);
   --theme-gradient: linear-gradient(135deg, #faf7ff 0%, #f3e8ff 25%, #e9d5ff 50%, #ddd6fe 75%, #c4b5fd 100%);
-  --theme-text-primary: #4c1d95;
-  --theme-text-secondary: #6b21a8;
-  --theme-text-muted: #7c3aed;
-  --theme-border: #c4b5fd;
-  --theme-purple: #8b5cf6;
-  --theme-pink: #d946ef;
-  --theme-success: #059669;
-  --theme-warning: #d97706;
-  --theme-error: #dc2626;
-  --theme-blue: #0369a1;
+  --theme-text-primary: #0f172a;
+  --theme-text-secondary: #1e293b;
+  --theme-text-muted: #334155;
+  --theme-border: rgba(76, 29, 149, 0.25);
+  --theme-purple: #6d28d9;
+  --theme-pink: #a21caf;
+  --theme-success: #047857;
+  --theme-warning: #b45309;
+  --theme-error: #b91c1c;
+  --theme-blue: #1e40af;
 }
 
 /* Classes utilitárias para temas */
@@ -219,6 +219,22 @@ html {
 
 .theme-bg-overlay {
   background-color: var(--theme-bg-overlay);
+}
+
+/* Melhorias específicas para componentes com baixo contraste */
+.bg-white\/5,
+.bg-white\/10 {
+  background-color: var(--theme-bg-card) !important;
+  border: 1px solid var(--theme-border) !important;
+}
+
+/* Melhor contraste para toggles e switches */
+.switch-enhanced {
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.switch-enhanced .switch-thumb {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .theme-text-primary {

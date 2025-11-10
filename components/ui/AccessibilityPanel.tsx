@@ -68,15 +68,17 @@ export function AccessibilityPanel() {
                 </div>
                 <button
                   onClick={toggleHighContrast}
-                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
-                    highContrast ? 'bg-blue-600' : 'bg-gray-200 dark:bg-gray-700'
+                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 border-2 ${
+                    highContrast 
+                      ? 'bg-blue-600 border-blue-400' 
+                      : 'bg-gray-300 dark:bg-gray-600 border-gray-400 dark:border-gray-500'
                   }`}
                   role="switch"
                   aria-checked={highContrast}
                   aria-labelledby="high-contrast-label"
                 >
                   <span
-                    className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                    className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform shadow-md ${
                       highContrast ? 'translate-x-6' : 'translate-x-1'
                     }`}
                   />
@@ -98,15 +100,17 @@ export function AccessibilityPanel() {
                 </div>
                 <button
                   onClick={toggleLargeText}
-                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
-                    largeText ? 'bg-green-600' : 'bg-gray-200 dark:bg-gray-700'
+                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 border-2 ${
+                    largeText 
+                      ? 'bg-green-600 border-green-400' 
+                      : 'bg-gray-300 dark:bg-gray-600 border-gray-400 dark:border-gray-500'
                   }`}
                   role="switch"
                   aria-checked={largeText}
                   aria-labelledby="large-text-label"
                 >
                   <span
-                    className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                    className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform shadow-md ${
                       largeText ? 'translate-x-6' : 'translate-x-1'
                     }`}
                   />
@@ -128,15 +132,17 @@ export function AccessibilityPanel() {
                 </div>
                 <button
                   onClick={toggleReducedMotion}
-                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
-                    reducedMotion ? 'bg-purple-600' : 'bg-gray-200 dark:bg-gray-700'
+                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 border-2 ${
+                    reducedMotion 
+                      ? 'bg-purple-600 border-purple-400' 
+                      : 'bg-gray-300 dark:bg-gray-600 border-gray-400 dark:border-gray-500'
                   }`}
                   role="switch"
                   aria-checked={reducedMotion}
                   aria-labelledby="reduced-motion-label"
                 >
                   <span
-                    className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                    className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform shadow-md ${
                       reducedMotion ? 'translate-x-6' : 'translate-x-1'
                     }`}
                   />

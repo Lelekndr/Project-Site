@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, User } from 'lucide-react';
 import { Logo } from './Logo';
 import { Navigation } from './Navigation';
 import { getNavItems } from './navigationUtils';
@@ -93,8 +93,8 @@ export function Header() {
                 {isAuthenticated && user ? (
                   <div className="space-y-3">
                     <div className="flex items-center space-x-3 px-4 py-2">
-                      <div className="w-8 h-8 bg-pink-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
-                        {user.email?.charAt(0).toUpperCase()}
+                      <div className="w-8 h-8 bg-pink-600 rounded-full flex items-center justify-center">
+                        <User className="w-4 h-4 text-white" />
                       </div>
                       <div>
                         <p className="text-sm font-medium theme-text-primary">{user.email}</p>
