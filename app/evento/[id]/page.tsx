@@ -39,7 +39,7 @@ export default function EventPage({ params }: EventPageProps) {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
         <Link 
           href="/" 
-          className="inline-flex items-center space-x-2 text-white/70 hover:text-white transition-colors duration-200 group"
+          className="inline-flex items-center space-x-2 text-white/70 hover:text-white dark:text-white/70 dark:hover:text-white light:text-gray-600 light:hover:text-gray-900 transition-colors duration-200 group"
         >
           <ArrowLeft className="h-4 w-4 sm:h-5 sm:w-5 group-hover:-translate-x-1 transition-transform duration-200" />
           <span className="text-xs sm:text-sm font-medium">Voltar aos eventos</span>
@@ -65,22 +65,22 @@ export default function EventPage({ params }: EventPageProps) {
           <div className="space-y-4 sm:space-y-6">
             <div>
               <div className="flex flex-wrap items-center gap-2 mb-3 sm:mb-4">
-                <span className="bg-pink-600 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium">
+                <span className="bg-pink-600 text-white dark:text-white light:text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium">
                   {event.category}
                 </span>
                 {event.date && (
-                  <span className="bg-purple-600 text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium">
+                  <span className="bg-purple-600 text-white dark:text-white light:text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium">
                     {event.date}
                   </span>
                 )}
               </div>
               
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-white leading-tight mb-3 sm:mb-4">
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-white dark:text-white light:!text-black leading-tight mb-3 sm:mb-4">
                 {event.title}
               </h1>
               
               {event.subtitle && (
-                <p className="text-base sm:text-lg lg:text-xl text-white/80 mb-4 sm:mb-6">
+                <p className="text-base sm:text-lg lg:text-xl text-white/80 dark:text-white/80 light:!text-black mb-4 sm:mb-6">
                   {event.subtitle}
                 </p>
               )}
@@ -88,28 +88,28 @@ export default function EventPage({ params }: EventPageProps) {
 
             {/* Event Details */}
             <div className="space-y-3 sm:space-y-4">
-              <div className="flex items-center space-x-2 sm:space-x-3 text-white/70 text-sm sm:text-base">
+              <div className="flex items-center space-x-2 sm:space-x-3 text-white/70 dark:text-white/70 light:!text-black text-sm sm:text-base">
                 <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-pink-400 flex-shrink-0" />
                 <span>25 de Janeiro, 2024</span>
               </div>
               
-              <div className="flex items-center space-x-2 sm:space-x-3 text-white/70 text-sm sm:text-base">
+              <div className="flex items-center space-x-2 sm:space-x-3 text-white/70 dark:text-white/70 light:!text-black text-sm sm:text-base">
                 <Clock className="h-4 w-4 sm:h-5 sm:w-5 text-pink-400 flex-shrink-0" />
                 <span>20:00 - 23:00</span>
               </div>
               
-              <div className="flex items-center space-x-2 sm:space-x-3 text-white/70 text-sm sm:text-base">
+              <div className="flex items-center space-x-2 sm:space-x-3 text-white/70 dark:text-white/70 light:!text-black text-sm sm:text-base">
                 <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-pink-400 flex-shrink-0" />
                 <span>Centro de Convenções, São Paulo - SP</span>
               </div>
               
-              <div className="flex items-center space-x-2 sm:space-x-3 text-white/70 text-sm sm:text-base">
+              <div className="flex items-center space-x-2 sm:space-x-3 text-white/70 dark:text-white/70 light:!text-black text-sm sm:text-base">
                 <Users className="h-4 w-4 sm:h-5 sm:w-5 text-pink-400 flex-shrink-0" />
                 <span>234 pessoas interessadas</span>
               </div>
               
               {event.author && (
-                <div className="flex items-center space-x-2 sm:space-x-3 text-white/70 text-sm sm:text-base">
+                <div className="flex items-center space-x-2 sm:space-x-3 text-white/70 dark:text-white/70 light:!text-black text-sm sm:text-base">
                   <span className="font-medium">Organizado por:</span>
                   <span className="text-pink-400">{event.author}</span>
                 </div>
@@ -139,20 +139,20 @@ export default function EventPage({ params }: EventPageProps) {
 
       {/* Event Description */}
       <div className="mt-16 max-w-4xl mx-auto">
-        <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
-          <h2 className="text-2xl font-bold text-white mb-6">Sobre o Evento</h2>
+        <div className="bg-white/5 dark:bg-white/5 light:bg-gray-50 backdrop-blur-sm rounded-2xl p-8 border border-white/10 dark:border-white/10 light:border-gray-200 shadow-sm">
+          <h2 className="text-2xl font-bold text-white dark:text-white light:!text-black mb-6">Sobre o Evento</h2>
             <div className="prose prose-invert max-w-none">
-              <p className="text-white/80 text-lg leading-relaxed mb-4">
+              <p className="text-white/80 dark:text-white/80 light:!text-black text-lg leading-relaxed mb-4">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor 
                 incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
                 exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
               </p>
-              <p className="text-white/80 text-lg leading-relaxed mb-4">
+              <p className="text-white/80 dark:text-white/80 light:!text-black text-lg leading-relaxed mb-4">
                 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
                 fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in 
                 culpa qui officia deserunt mollit anim id est laborum.
               </p>
-              <p className="text-white/80 text-lg leading-relaxed">
+              <p className="text-white/80 dark:text-white/80 light:!text-black text-lg leading-relaxed">
                 Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque 
                 laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.
               </p>
@@ -164,18 +164,18 @@ export default function EventPage({ params }: EventPageProps) {
       {/* Modal de Inscrição */}
       {showRegistrationModal && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-          <div className="bg-gray-900/95 backdrop-blur-md rounded-lg p-8 max-w-md w-full border border-white/20">
+          <div className="bg-gray-900/95 dark:bg-gray-900/95 light:bg-white/95 backdrop-blur-md rounded-lg p-8 max-w-md w-full border border-white/20 dark:border-white/20 light:border-gray-300">
             <div className="text-center">
-              <h3 className="text-2xl font-bold text-white mb-4">Confirmar Inscrição</h3>
-              <p className="text-white/80 mb-6">
+              <h3 className="text-2xl font-bold text-white dark:text-white light:text-gray-900 mb-4">Confirmar Inscrição</h3>
+              <p className="text-white/80 dark:text-white/80 light:text-gray-700 mb-6">
                 Você está se inscrevendo no evento:<br />
-                <span className="font-semibold text-pink-400">{event.title}</span>
+                <span className="font-semibold text-pink-400">{ event.title}</span>
               </p>
               
               <div className="space-y-4 text-left mb-6">
-                <div className="bg-white/5 rounded-lg p-4">
-                  <h4 className="text-white font-semibold mb-2">Detalhes da Inscrição:</h4>
-                  <div className="text-sm text-white/70 space-y-1">
+                <div className="bg-white/5 dark:bg-white/5 light:bg-gray-100 rounded-lg p-4">
+                  <h4 className="text-white dark:text-white light:text-gray-900 font-semibold mb-2">Detalhes da Inscrição:</h4>
+                  <div className="text-sm text-white/70 dark:text-white/70 light:text-gray-700 space-y-1">
                     <p>• Você receberá um email de confirmação</p>
                     <p>• Lembrete será enviado 1 dia antes</p>
                     <p>• Inscrição pode ser cancelada até 24h antes</p>
@@ -187,7 +187,7 @@ export default function EventPage({ params }: EventPageProps) {
                 <Button
                   onClick={() => setShowRegistrationModal(false)}
                   variant="outline"
-                  className="flex-1 bg-transparent border-white/20 text-white hover:bg-white/10"
+                  className="flex-1 bg-transparent border-white/20 text-white dark:text-white light:text-gray-900 hover:bg-white/10"
                 >
                   Cancelar
                 </Button>

@@ -34,12 +34,24 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     if (mounted) {
       localStorage.setItem('theme', theme);
       
-      // Aplicar a classe no html
+      // Aplicar a classe no html e body para garantir propagação
+      const htmlEl = document.documentElement;
+      const bodyEl = document.body;
+      
       if (theme === 'dark') {
-        document.documentElement.classList.add('dark');
+        htmlEl.classList.add('dark');
+        htmlEl.classList.remove('light');
+        bodyEl.classList.add('dark');
+        bodyEl.classList.remove('light');
       } else {
-        document.documentElement.classList.remove('dark');
+        htmlEl.classList.remove('dark');
+        htmlEl.classList.add('light');
+        bodyEl.classList.remove('dark');
+        bodyEl.classList.add('light');
       }
+      
+      // Force re-render by triggering a style change
+      htmlEl.style.colorScheme = theme;
     }
   }, [theme, mounted]);
 

@@ -319,10 +319,10 @@ Clique em OK para confirmar o cancelamento.`);
                 </div>
                 <TrendingUp className="w-5 h-5 text-green-400" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-1">
+              <h3 className="text-2xl font-bold text-white dark:text-white light:text-gray-900 mb-1">
                 {totalMetrics.totalViews.toLocaleString()}
               </h3>
-              <p className="text-white/70 text-sm">Visualizações Totais</p>
+              <p className="text-white/70 dark:text-white/70 light:text-gray-700 text-sm">Visualizações Totais</p>
             </div>
             
             <div className="bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20">
@@ -332,10 +332,10 @@ Clique em OK para confirmar o cancelamento.`);
                 </div>
                 <TrendingUp className="w-5 h-5 text-green-400" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-1">
+              <h3 className="text-2xl font-bold text-white dark:text-white light:text-gray-900 mb-1">
                 {totalMetrics.registrations}
               </h3>
-              <p className="text-white/70 text-sm">Total de Inscrições</p>
+              <p className="text-white/70 dark:text-white/70 light:text-gray-700 text-sm">Total de Inscrições</p>
             </div>
             
             <div className="bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20">
@@ -358,10 +358,10 @@ Clique em OK para confirmar o cancelamento.`);
                 </div>
                 <Activity className="w-5 h-5 text-purple-400" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-1">
+              <h3 className="text-2xl font-bold text-white dark:text-white light:text-gray-900 mb-1">
                 {totalMetrics.avgRating.toFixed(1)}
               </h3>
-              <p className="text-white/70 text-sm">Avaliação Média</p>
+              <p className="text-white/70 dark:text-white/70 light:text-gray-700 text-sm">Avaliação Média</p>
             </div>
           </div>
 
@@ -461,7 +461,7 @@ Clique em OK para confirmar o cancelamento.`);
                       <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-4">
                         <div className="flex-1">
                           <div className="flex items-center gap-3 mb-2">
-                            <h3 className="text-xl font-semibold text-white">{event.title}</h3>
+                            <h3 className="text-xl font-semibold text-white dark:text-white light:text-gray-900">{event.title}</h3>
                             <span className={`px-3 py-1 text-xs rounded-full ${getStatusColor(event.status)}`}>
                               {getStatusText(event.status)}
                             </span>
@@ -471,10 +471,10 @@ Clique em OK para confirmar o cancelamento.`);
                           </div>
                           
                           {event.subtitle && (
-                            <p className="text-white/60 text-sm mb-3">{event.subtitle}</p>
+                            <p className="text-white/60 dark:text-white/60 light:text-gray-700 text-sm mb-3">{event.subtitle}</p>
                           )}
                           
-                          <div className="flex flex-wrap items-center gap-4 text-white/70 text-sm">
+                          <div className="flex flex-wrap items-center gap-4 text-white/70 dark:text-white/70 light:text-gray-700 text-sm">
                             <div className="flex items-center gap-1">
                               <Calendar className="w-4 h-4" />
                               <span>{event.date}</span>

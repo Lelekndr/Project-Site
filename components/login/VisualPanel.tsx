@@ -19,7 +19,7 @@ export function VisualPanel() {
       {/* 3. O Texto Grande (usando div simples para evitar importações desnecessárias) */}
       <div className="absolute inset-0 flex items-center justify-end p-16">
         <h2 
-          className="text-[120px] font-extrabold text-white opacity-80"
+          className="text-[120px] font-extrabold text-white dark:text-white light:text-gray-900 opacity-80"
           style={{ 
             writingMode: 'vertical-rl',
             textOrientation: 'mixed',

@@ -18,7 +18,7 @@ export interface CategoryData {
 export const featuredEvents: EventData[] = [
   {
     id: 1,
-    imageSrc: "/images/image1.png",
+    imageSrc: "/images/pexels-bertellifotografia-3321793.jpg",
     title: "Carnaval de Rua 2024: Blocos e Trios Elétricos",
     subtitle: "Grande festa popular com desfiles coloridos e música animada",
     author: "Chiari Sato",
@@ -27,7 +27,7 @@ export const featuredEvents: EventData[] = [
   },
   {
     id: 2,
-    imageSrc: "/images/image2.jpg",
+    imageSrc: "/images/comedy-club.jpg",
     title: "Stand Up Comedy Night com Comediantes Nacionais",
     subtitle: "Uma noite repleta de risadas e boa comédia brasileira",
     author: "Olivia Wilson",
@@ -37,7 +37,7 @@ export const featuredEvents: EventData[] = [
   },
   {
     id: 3,
-    imageSrc: "/images/image3.jpg",
+    imageSrc: "/images/feira-de-adoçao.jpg",
     title: "Pet Fest: Festival de Adoção e Diversão Canina",
     subtitle: "Evento para toda família e seus pets com atividades e adoção responsável",
     author: "Pet Events",
@@ -46,7 +46,7 @@ export const featuredEvents: EventData[] = [
   },
   {
     id: 4,
-    imageSrc: "/images/image4.avif",
+    imageSrc: "/images/tech-commit.jpg",
     title: "TechConnect Summit 2024: Inovação e IA",
     subtitle: "Conferência sobre as últimas tendências em tecnologia e inteligência artificial",
     author: "Tech Team",
@@ -55,7 +55,7 @@ export const featuredEvents: EventData[] = [
   },
   {
     id: 5,
-    imageSrc: "/images/image4.avif",
+    imageSrc: "/images/teatro.jpg",
     title: "Teatro: Romeo e Julieta - Versão Contemporânea",
     subtitle: "Uma adaptação moderna do clássico shakespeariano",
     author: "Teatro Municipal",
@@ -64,7 +64,7 @@ export const featuredEvents: EventData[] = [
   },
   {
     id: 6,
-    imageSrc: "/images/image4.avif",
+    imageSrc: "/images/futebol-amador.jpg",
     title: "Copa Regional de Futebol Amador 2024",
     subtitle: "Campeonato com 32 times da região metropolitana",
     author: "Liga Esportiva",
@@ -74,7 +74,7 @@ export const featuredEvents: EventData[] = [
   },
   {
     id: 7,
-    imageSrc: "/images/image4.avif",
+    imageSrc: "/images/marketing-summit.jpg",
     title: "Marketing Digital Expo: Estratégias para 2024",
     subtitle: "As últimas tendências em marketing digital e growth hacking",
     author: "Marketing Pro",
@@ -83,7 +83,7 @@ export const featuredEvents: EventData[] = [
   },
   {
     id: 8,
-    imageSrc: "/images/image4.avif",
+    imageSrc: "/images/pexels-alxs-919734.jpg",
     title: "Rock Brasil Festival: 3 Dias de Música Nacional",
     subtitle: "Festival com as melhores bandas do rock nacional",
     author: "Produtora Musical",
@@ -93,7 +93,7 @@ export const featuredEvents: EventData[] = [
   },
   {
     id: 9,
-    imageSrc: "/images/image4.avif",
+    imageSrc: "/images/bootcamp.jpg",
     title: "DevBootcamp: React, Next.js e TypeScript",
     subtitle: "Workshop intensivo de desenvolvimento web moderno",
     author: "Dev Academy",
@@ -102,7 +102,7 @@ export const featuredEvents: EventData[] = [
   },
   {
     id: 10,
-    imageSrc: "/images/image4.avif",
+    imageSrc: "/images/comedy-club.jpg",
     title: "Comedy Club: Noite de Humor com 5 Comediantes",
     subtitle: "Stand-up comedy ao vivo com artistas renomados",
     author: "Comedy Club",
@@ -112,7 +112,7 @@ export const featuredEvents: EventData[] = [
   },
   {
     id: 11,
-    imageSrc: "/images/image4.avif",
+    imageSrc: "/images/feira-de-adoçao.jpg",
     title: "Expo Pet: Concurso Canino e Feira de Adoção",
     subtitle: "Concurso de beleza canina, feira de adoção e produtos pet",
     author: "Pet Society",
@@ -121,7 +121,7 @@ export const featuredEvents: EventData[] = [
   },
   {
     id: 12,
-    imageSrc: "/images/image4.avif",
+    imageSrc: "/images/feira-de-jazz.jpg",
     title: "Festival de Jazz do Brasil: 3 Noites Especiais",
     subtitle: "O melhor do jazz nacional e internacional",
     author: "Jazz Brasil",
@@ -131,7 +131,7 @@ export const featuredEvents: EventData[] = [
   },
   {
     id: 13,
-    imageSrc: "/images/image4.avif",
+    imageSrc: "/images/teatro.jpg",
     title: "Teatro Musical: O Rei Leão em Português",
     subtitle: "Espetáculo musical da Broadway adaptado para o Brasil",
     author: "Teatro Alfa",
@@ -141,7 +141,7 @@ export const featuredEvents: EventData[] = [
   },
   {
     id: 14,
-    imageSrc: "/images/image4.avif",
+    imageSrc: "/images/corrida-pet.jpg",
     title: "Pet Run: Corrida com Cães para Caridade",
     subtitle: "Corrida beneficente de 5km com seu melhor amigo",
     author: "ONG AnimaisVida",
@@ -151,7 +151,7 @@ export const featuredEvents: EventData[] = [
   },
   {
     id: 15,
-    imageSrc: "/images/image4.avif",
+    imageSrc: "/images/hacktaton.jpg",
     title: "Hackathon de IA: 48h de Inovação",
     subtitle: "Maratona de programação focada em inteligência artificial",
     author: "TechHub",
@@ -161,7 +161,7 @@ export const featuredEvents: EventData[] = [
   },
   {
     id: 16,
-    imageSrc: "/images/image4.avif",
+    imageSrc: "/images/tenis-amador.jpg",
     title: "Open de Tênis Amador da Cidade",
     subtitle: "Torneio aberto para todas as categorias",
     author: "Clube de Tênis Municipal",
@@ -171,7 +171,7 @@ export const featuredEvents: EventData[] = [
   },
   {
     id: 17,
-    imageSrc: "/images/image4.avif",
+    imageSrc: "/images/comedy-club.jpg",
     title: "Stand Up: Batalha de Novos Talentos",
     subtitle: "Competição de comédia com comediantes iniciantes",
     author: "Risadaria Comedy",
@@ -181,7 +181,7 @@ export const featuredEvents: EventData[] = [
   },
   {
     id: 18,
-    imageSrc: "/images/image4.avif",
+    imageSrc: "/images/marketing-summit.jpg",
     title: "Marketing Summit: ROI e Performance",
     subtitle: "Conferência sobre métricas e resultados em marketing",
     author: "Growth Academy",

@@ -92,13 +92,13 @@ export function FeaturedEventsSwiper({ events }: FeaturedEventsSwiperProps) {
       
       {/* Navigation Buttons - Hidden on mobile, visible on tablet+ */}
       <button 
-        className="swiper-button-prev-custom absolute top-1/2 -left-2 lg:-left-4 transform -translate-y-1/2 z-10 bg-white/10 hover:bg-white/20 p-2 rounded-full backdrop-blur-sm text-white transition-colors hidden sm:block"
+        className="swiper-button-prev-custom absolute top-1/2 -left-2 lg:-left-4 transform -translate-y-1/2 z-10 bg-white/10 hover:bg-white/20 p-2 rounded-full backdrop-blur-sm text-white dark:text-white light:text-gray-900 transition-colors hidden sm:block"
         aria-label="Evento anterior no carrossel"
       >
         <ChevronLeft className="w-6 h-6 lg:w-8 lg:h-8" />
       </button>
       <button 
-        className="swiper-button-next-custom absolute top-1/2 -right-2 lg:-right-4 transform -translate-y-1/2 z-10 bg-white/10 hover:bg-white/20 p-2 rounded-full backdrop-blur-sm text-white transition-colors hidden sm:block"
+        className="swiper-button-next-custom absolute top-1/2 -right-2 lg:-right-4 transform -translate-y-1/2 z-10 bg-white/10 hover:bg-white/20 p-2 rounded-full backdrop-blur-sm text-white dark:text-white light:text-gray-900 transition-colors hidden sm:block"
         aria-label="Próximo evento no carrossel"
       >
         <ChevronRight className="w-6 h-6 lg:w-8 lg:h-8" />

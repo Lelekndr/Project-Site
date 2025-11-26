@@ -3,7 +3,7 @@ import { LoginForm } from "@/components/login/LoginForm";
 export default function LoginPage() {
   return (
     <div 
-      className="relative grid lg:grid-cols-5 w-full min-h-screen"
+      className="login-page relative grid lg:grid-cols-5 w-full min-h-screen"
       style={{ 
         background: '#4c1d95',
         backgroundImage: 'linear-gradient(135deg, #4c1d95 0%, #6b21a8 25%, #581c87 75%, #000000 100%)',

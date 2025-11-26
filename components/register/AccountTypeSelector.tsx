@@ -9,7 +9,7 @@ interface AccountTypeSelectorProps {
 export function AccountTypeSelector({ accountType, onChange }: AccountTypeSelectorProps) {
   return (
     <div className="space-y-3">
-      <Label className="text-white text-sm font-medium">
+      <Label className="text-white dark:text-white light:text-gray-900 text-sm font-medium">
         Tipo de conta
       </Label>
       <div className="flex space-x-4">
@@ -25,7 +25,7 @@ export function AccountTypeSelector({ accountType, onChange }: AccountTypeSelect
           />
           <Label 
             htmlFor="pessoa-fisica" 
-            className="flex items-center space-x-2 text-white text-sm cursor-pointer"
+            className="flex items-center space-x-2 text-white dark:text-white light:text-gray-900 text-sm cursor-pointer"
           >
             <UserCircle className="h-4 w-4 text-gray-400" />
             <span>Pessoa Física</span>
@@ -44,7 +44,7 @@ export function AccountTypeSelector({ accountType, onChange }: AccountTypeSelect
           />
           <Label 
             htmlFor="pessoa-juridica" 
-            className="flex items-center space-x-2 text-white text-sm cursor-pointer"
+            className="flex items-center space-x-2 text-white dark:text-white light:text-gray-900 text-sm cursor-pointer"
           >
             <Building className="h-4 w-4 text-gray-400" />
             <span>Pessoa Jurídica</span>

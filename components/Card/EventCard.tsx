@@ -37,13 +37,12 @@ export function EventCard({ data, isFeatured = false }: EventCardProps) {
         </div>
         
         {/* Card Content */}
-                {/* Card Content */}
-        <div className="relative p-4 sm:p-6 flex flex-col justify-end h-full theme-text-primary">
+        <div className="relative p-4 sm:p-6 flex flex-col justify-end h-full text-white dark:text-white light:text-gray-900">
           
           {/* Main Title */}
           <h3 
             id={`event-title-${id}`}
-            className={`text-lg sm:text-xl font-bold leading-tight mt-auto theme-text-primary group-hover:theme-pink transition-colors duration-300 ${isFeatured ? 'sm:text-2xl' : ''}`}
+            className={`text-lg sm:text-xl font-bold leading-tight mt-auto text-white dark:text-white light:text-gray-900 group-hover:text-pink-400 transition-colors duration-300 ${isFeatured ? 'sm:text-2xl' : ''}`}
           >
             {title}
           </h3>
@@ -51,7 +50,7 @@ export function EventCard({ data, isFeatured = false }: EventCardProps) {
           {/* Subtitle */}
           {subtitle && (
             <p 
-              className="mt-1 text-xs sm:text-sm theme-text-secondary group-hover:theme-text-primary transition-colors duration-300 line-clamp-2"
+              className="mt-1 text-xs sm:text-sm text-white/90 dark:text-white/90 light:text-gray-700 group-hover:text-white dark:group-hover:text-white light:group-hover:text-gray-900 transition-colors duration-300 line-clamp-2"
               aria-describedby={`event-title-${id}`}
             >
               {subtitle}
@@ -62,11 +61,11 @@ export function EventCard({ data, isFeatured = false }: EventCardProps) {
           <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t theme-border">
             {author && category && (
               <div className="flex flex-col sm:flex-row text-xs space-y-1 sm:space-y-0 sm:space-x-2">
-                <span className="font-bold theme-text-primary" aria-label={`Criado por ${author}`}>
+                <span className="font-bold text-white dark:text-white light:text-gray-900" aria-label={`Criado por ${author}`}>
                   BY {author.toUpperCase()}
                 </span>
                 <span 
-                  className="theme-pink group-hover:theme-purple transition-colors duration-300 sm:border-l theme-border sm:pl-2"
+                  className="text-pink-400 group-hover:text-purple-400 transition-colors duration-300 sm:border-l border-white/20 sm:pl-2"
                   aria-label={`Categoria: ${category}`}
                 >
                   {category.toUpperCase()}
@@ -78,7 +77,7 @@ export function EventCard({ data, isFeatured = false }: EventCardProps) {
           {/* Featured Badge */}
           {isFeatured && date && (
             <div 
-              className="absolute top-3 sm:top-4 right-3 sm:right-4 theme-bg-pink px-2 sm:px-3 py-1 rounded-full text-xs font-bold theme-text-primary group-hover:theme-bg-purple transition-colors duration-300"
+              className="absolute top-3 sm:top-4 right-3 sm:right-4 bg-pink-600 px-2 sm:px-3 py-1 rounded-full text-xs font-bold text-white dark:text-white light:text-gray-900 group-hover:bg-purple-600 transition-colors duration-300"
               aria-label={`Evento em destaque - Data: ${date}`}
               role="badge"
             >

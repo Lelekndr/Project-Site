@@ -9,7 +9,7 @@ interface ThemeWrapperProps {
 export function ThemeWrapper({ children }: ThemeWrapperProps) {
   return (
     <div 
-      className="min-h-screen transition-all duration-300 theme-text-primary"
+      className="min-h-screen transition-all duration-300"
       style={{ 
         background: 'var(--theme-gradient)',
         backgroundSize: 'cover',

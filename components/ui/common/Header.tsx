@@ -22,7 +22,7 @@ export function Header() {
 
   return (
     <header 
-      className="safe-area-top py-3 px-4 sm:py-4 sm:px-8 flex justify-between items-center theme-text-primary border-b theme-border relative"
+      className="safe-area-top py-3 px-4 sm:py-4 sm:px-8 flex justify-between items-center text-white dark:text-white light:text-gray-900 border-b border-white/10 dark:border-white/10 light:border-gray-200 relative backdrop-blur-sm bg-white/5 dark:bg-white/5 light:bg-white/80"
       role="banner"
       aria-label="Cabeçalho principal do site"
     >
@@ -40,7 +40,7 @@ export function Header() {
       {/* Mobile Menu Button */}
       <button
         onClick={toggleMobileMenu}
-        className="md:hidden p-2 theme-text-primary hover:theme-pink transition-colors"
+        className="md:hidden p-2 text-white dark:text-white light:text-gray-900 hover:text-pink-400 transition-colors"
         aria-label={isMobileMenuOpen ? "Fechar menu mobile" : "Abrir menu mobile"}
         aria-expanded={isMobileMenuOpen}
         aria-controls="mobile-menu"
@@ -61,7 +61,7 @@ export function Header() {
           />
                     <div 
             id="mobile-menu"
-            className="fixed top-[73px] right-0 left-0 theme-bg-card backdrop-blur-md border-t theme-border z-50 md:hidden"
+            className="fixed top-[73px] right-0 left-0 bg-white/10 dark:bg-white/10 light:bg-white/95 backdrop-blur-md border-t border-white/20 dark:border-white/20 light:border-gray-200 z-50 md:hidden"
             role="navigation"
             aria-label="Menu mobile de navegação"
           >
@@ -72,7 +72,7 @@ export function Header() {
                   <Link 
                     key={item.name} 
                     href={item.href} 
-                    className="flex items-center space-x-3 py-3 px-4 hover:theme-bg-card rounded-lg transition-colors text-base theme-text-primary"
+                    className="flex items-center space-x-3 py-3 px-4 hover:bg-white/10 dark:hover:bg-white/10 light:hover:bg-gray-100 rounded-lg transition-colors text-base text-white dark:text-white light:text-gray-900"
                     onClick={() => setIsMobileMenuOpen(false)}
                     role="menuitem"
                     aria-label={`Navegar para ${item.name}`}
@@ -97,8 +97,8 @@ export function Header() {
                         <User className="w-4 h-4 text-white" />
                       </div>
                       <div>
-                        <p className="text-sm font-medium theme-text-primary">{user.email}</p>
-                        <p className="text-xs theme-text-muted capitalize">{user.role}</p>
+                        <p className="text-sm font-medium text-white dark:text-white light:text-gray-900">{user.email}</p>
+                        <p className="text-xs text-white/70 dark:text-white/70 light:text-gray-600 capitalize">{user.role}</p>
                       </div>
                     </div>
                     <button
@@ -106,7 +106,7 @@ export function Header() {
                         logout();
                         setIsMobileMenuOpen(false);
                       }}
-                        className="w-full text-left px-4 py-3 hover:theme-bg-card rounded-lg transition-colors theme-error"
+                        className="w-full text-left px-4 py-3 hover:bg-white/10 dark:hover:bg-white/10 light:hover:bg-gray-100 rounded-lg transition-colors text-red-400"
                     >
                       Logout
                     </button>
@@ -115,14 +115,14 @@ export function Header() {
                   <div className="space-y-3">
                     <Link
                       href="/login"
-                      className="block w-full px-4 py-3 text-center theme-bg-pink hover:theme-bg-purple rounded-lg transition-colors font-medium theme-text-primary"
+                      className="block w-full px-4 py-3 text-center bg-pink-600 hover:bg-purple-600 rounded-lg transition-colors font-medium text-white"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       Login
                     </Link>
                     <Link
                       href="/register"
-                      className="block w-full px-4 py-3 text-center border theme-border hover:theme-bg-card rounded-lg transition-colors theme-text-primary"
+                      className="block w-full px-4 py-3 text-center border border-white/20 dark:border-white/20 light:border-gray-300 hover:bg-white/10 dark:hover:bg-white/10 light:hover:bg-gray-100 rounded-lg transition-colors text-white dark:text-white light:text-gray-900"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       Cadastre-se

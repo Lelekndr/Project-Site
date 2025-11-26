@@ -15,18 +15,18 @@ export function Footer() {
           <div className="col-span-1 sm:col-span-2 lg:col-span-2">
             <div className="flex items-center space-x-2 mb-3 sm:mb-4">
               <span className="text-xl sm:text-2xl font-bold text-yellow-400" aria-hidden="true">★</span>
-              <h3 className="text-xl sm:text-2xl font-bold text-white tracking-wider">COLALÁ</h3>
+              <h3 className="text-xl sm:text-2xl font-bold text-white dark:text-white light:text-gray-900 tracking-wider">COLALÁ</h3>
             </div>
-            <p className="text-white/70 text-xs sm:text-sm max-w-md">
+            <p className="text-white/70 dark:text-white/70 light:text-gray-700 text-xs sm:text-sm max-w-md">
               Conecte-se aos melhores eventos da sua cidade. Descubra, participe e viva experiências únicas.
             </p>
           </div>
 
           {/* Links Rápidos */}
           <div className="sm:col-span-1">
-            <h4 className="text-white font-semibold mb-3 sm:mb-4 text-sm sm:text-base">Links Rápidos</h4>
+            <h4 className="text-white dark:text-white light:text-gray-900 font-semibold mb-3 sm:mb-4 text-sm sm:text-base">Links Rápidos</h4>
             <nav aria-label="Links de navegação rápida">
-              <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-white/70">
+              <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-white/70 dark:text-white/70 light:text-gray-700">
                 <li><Link href="/" className="hover:text-pink-400 transition-colors">Home</Link></li>
                 <li><Link href="/eventos" className="hover:text-pink-400 transition-colors">Eventos</Link></li>
                 <li><Link href="/meus-eventos" className="hover:text-pink-400 transition-colors">Meus Eventos</Link></li>
@@ -37,9 +37,9 @@ export function Footer() {
 
           {/* Contato */}
           <div className="sm:col-span-1">
-            <h4 className="text-white font-semibold mb-3 sm:mb-4 text-sm sm:text-base">Contato</h4>
+            <h4 className="text-white dark:text-white light:text-gray-900 font-semibold mb-3 sm:mb-4 text-sm sm:text-base">Contato</h4>
             <address className="not-italic">
-              <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-white/70">
+              <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-white/70 dark:text-white/70 light:text-gray-700">
                 <li>
                   <a 
                     href="mailto:contato@colala.com" 
@@ -65,7 +65,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-white/10 mt-6 sm:mt-8 pt-6 sm:pt-8 text-center">
-          <p className="text-white/50 text-xs sm:text-sm">
+          <p className="text-white/50 dark:text-white/50 light:text-gray-600 text-xs sm:text-sm">
             © 2024 COLALÁ. Todos os direitos reservados.
           </p>
         </div>

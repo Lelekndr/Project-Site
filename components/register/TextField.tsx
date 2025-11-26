@@ -25,7 +25,7 @@ export function TextField({
 }: TextFieldProps) {
   return (
     <div className="space-y-2">
-      <Label htmlFor={id} className="text-white text-sm font-medium">
+      <Label htmlFor={id} className="text-white dark:text-white light:text-gray-900 text-sm font-medium">
         {label}
       </Label>
       <div className="relative">
@@ -37,7 +37,7 @@ export function TextField({
           placeholder={placeholder}
           value={value}
           onChange={onChange}
-          className="pl-10 bg-white/10 border-white/20 text-white placeholder:text-gray-400 focus:border-purple-400 focus:ring-purple-400"
+          className="pl-10 bg-white/10 dark:bg-white/10 light:bg-white border-white/20 dark:border-white/20 light:border-gray-300 text-white dark:text-white light:text-gray-900 placeholder:text-gray-400 focus:border-purple-400 focus:ring-purple-400"
           required
         />
       </div>

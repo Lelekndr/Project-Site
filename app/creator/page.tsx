@@ -15,10 +15,10 @@ export default function CreatorDashboardPage() {
         <div className="container mx-auto px-4 py-12">
           {/* Header do Dashboard */}
           <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-white mb-4">
+            <h1 className="text-4xl font-bold text-white dark:text-white light:text-gray-900 mb-4">
               Dashboard do Criador
             </h1>
-            <p className="text-white/70 text-lg max-w-2xl mx-auto">
+            <p className="text-white/70 dark:text-white/70 light:text-gray-700 text-lg max-w-2xl mx-auto">
               Visão geral da sua performance e próximas ações
             </p>
           </div>
@@ -32,8 +32,8 @@ export default function CreatorDashboardPage() {
                 </div>
                 <TrendingUp className="w-5 h-5 text-green-400" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-1">12</h3>
-              <p className="text-white/70 text-sm">Eventos Criados</p>
+              <h3 className="text-2xl font-bold text-white dark:text-white light:text-gray-900 mb-1">12</h3>
+              <p className="text-white/70 dark:text-white/70 light:text-gray-700 text-sm">Eventos Criados</p>
               <p className="text-green-400 text-xs mt-1">+2 este mês</p>
             </div>
             
@@ -44,8 +44,8 @@ export default function CreatorDashboardPage() {
                 </div>
                 <TrendingUp className="w-5 h-5 text-green-400" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-1">2.4K</h3>
-              <p className="text-white/70 text-sm">Total de Participantes</p>
+              <h3 className="text-2xl font-bold text-white dark:text-white light:text-gray-900 mb-1">2.4K</h3>
+              <p className="text-white/70 dark:text-white/70 light:text-gray-700 text-sm">Total de Participantes</p>
               <p className="text-green-400 text-xs mt-1">+380 este mês</p>
             </div>
             
@@ -56,8 +56,8 @@ export default function CreatorDashboardPage() {
                 </div>
                 <TrendingUp className="w-5 h-5 text-green-400" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-1">R$ 45K</h3>
-              <p className="text-white/70 text-sm">Receita Total</p>
+              <h3 className="text-2xl font-bold text-white dark:text-white light:text-gray-900 mb-1">R$ 45K</h3>
+              <p className="text-white/70 dark:text-white/70 light:text-gray-700 text-sm">Receita Total</p>
               <p className="text-green-400 text-xs mt-1">+R$ 8.4K este mês</p>
             </div>
             
@@ -68,8 +68,8 @@ export default function CreatorDashboardPage() {
                 </div>
                 <Eye className="w-5 h-5 text-purple-400" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-1">4.8</h3>
-              <p className="text-white/70 text-sm">Avaliação Média</p>
+              <h3 className="text-2xl font-bold text-white dark:text-white light:text-gray-900 mb-1">4.8</h3>
+              <p className="text-white/70 dark:text-white/70 light:text-gray-700 text-sm">Avaliação Média</p>
               <p className="text-purple-400 text-xs mt-1">15.2K visualizações</p>
             </div>
           </div>
@@ -79,7 +79,7 @@ export default function CreatorDashboardPage() {
             {/* Ações Rápidas */}
             <div className="lg:col-span-1">
               <div className="bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20">
-                <h3 className="text-lg font-semibold text-white mb-6">Ações Rápidas</h3>
+                <h3 className="text-lg font-semibold text-white dark:text-white light:text-gray-900 mb-6">Ações Rápidas</h3>
                 <div className="space-y-3">
                   <Button 
                     className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white justify-start"
@@ -111,12 +111,12 @@ export default function CreatorDashboardPage() {
             {/* Performance Este Mês */}
             <div className="lg:col-span-2">
               <div className="bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20">
-                <h3 className="text-lg font-semibold text-white mb-6">Performance Este Mês</h3>
+                <h3 className="text-lg font-semibold text-white dark:text-white light:text-gray-900 mb-6">Performance Este Mês</h3>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-4">
                     <div className="flex justify-between items-center">
-                      <span className="text-white/70">Novos Seguidores</span>
+                      <span className="text-white/70 dark:text-white/70 light:text-gray-700">Novos Seguidores</span>
                       <span className="text-green-400 font-semibold">+127</span>
                     </div>
                     <div className="w-full bg-white/10 rounded-full h-2">
@@ -126,7 +126,7 @@ export default function CreatorDashboardPage() {
                   
                   <div className="space-y-4">
                     <div className="flex justify-between items-center">
-                      <span className="text-white/70">Taxa de Conversão</span>
+                      <span className="text-white/70 dark:text-white/70 light:text-gray-700">Taxa de Conversão</span>
                       <span className="text-blue-400 font-semibold">68%</span>
                     </div>
                     <div className="w-full bg-white/10 rounded-full h-2">
@@ -136,7 +136,7 @@ export default function CreatorDashboardPage() {
                   
                   <div className="space-y-4">
                     <div className="flex justify-between items-center">
-                      <span className="text-white/70">Engajamento</span>
+                      <span className="text-white/70 dark:text-white/70 light:text-gray-700">Engajamento</span>
                       <span className="text-purple-400 font-semibold">84%</span>
                     </div>
                     <div className="w-full bg-white/10 rounded-full h-2">
@@ -146,7 +146,7 @@ export default function CreatorDashboardPage() {
                   
                   <div className="space-y-4">
                     <div className="flex justify-between items-center">
-                      <span className="text-white/70">Satisfação</span>
+                      <span className="text-white/70 dark:text-white/70 light:text-gray-700">Satisfação</span>
                       <span className="text-yellow-400 font-semibold">92%</span>
                     </div>
                     <div className="w-full bg-white/10 rounded-full h-2">
@@ -162,7 +162,7 @@ export default function CreatorDashboardPage() {
           <div className="mt-8">
             <div className="bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20">
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-semibold text-white">Próximos Eventos</h3>
+                <h3 className="text-lg font-semibold text-white dark:text-white light:text-gray-900">Próximos Eventos</h3>
                 <Button 
                   className="bg-purple-600 hover:bg-purple-700 text-white text-sm px-4 py-2"
                   onClick={() => window.location.href = '/creator/events'}
@@ -178,8 +178,8 @@ export default function CreatorDashboardPage() {
                       <Calendar className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <h4 className="text-white font-medium">Workshop de Desenvolvimento Web</h4>
-                      <p className="text-white/60 text-sm">15 de Novembro, 2025 - 14:00</p>
+                      <h4 className="text-white dark:text-white light:text-gray-900 font-medium">Workshop de Desenvolvimento Web</h4>
+                      <p className="text-white/60 dark:text-white/60 light:text-gray-600 text-sm">15 de Novembro, 2025 - 14:00</p>
                       <div className="flex items-center gap-4 mt-1">
                         <span className="text-green-400 text-xs">45/50 inscritos</span>
                         <span className="text-blue-400 text-xs">1.2K visualizações</span>
@@ -187,8 +187,8 @@ export default function CreatorDashboardPage() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="text-white font-semibold">R$ 6.750</p>
-                    <p className="text-white/60 text-sm">Receita atual</p>
+                    <p className="text-white dark:text-white light:text-gray-900 font-semibold">R$ 6.750</p>
+                    <p className="text-white/60 dark:text-white/60 light:text-gray-600 text-sm">Receita atual</p>
                   </div>
                 </div>
                 
@@ -198,8 +198,8 @@ export default function CreatorDashboardPage() {
                       <Calendar className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <h4 className="text-white font-medium">Festival de Jazz Contemporâneo</h4>
-                      <p className="text-white/60 text-sm">8 de Novembro, 2025 - 20:00</p>
+                      <h4 className="text-white dark:text-white light:text-gray-900 font-medium">Festival de Jazz Contemporâneo</h4>
+                      <p className="text-white/60 dark:text-white/60 light:text-gray-600 text-sm">8 de Novembro, 2025 - 20:00</p>
                       <div className="flex items-center gap-4 mt-1">
                         <span className="text-green-400 text-xs">180/200 inscritos</span>
                         <span className="text-blue-400 text-xs">2.8K visualizações</span>
@@ -207,8 +207,8 @@ export default function CreatorDashboardPage() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="text-white font-semibold">R$ 14.400</p>
-                    <p className="text-white/60 text-sm">Receita atual</p>
+                    <p className="text-white dark:text-white light:text-gray-900 font-semibold">R$ 14.400</p>
+                    <p className="text-white/60 dark:text-white/60 light:text-gray-600 text-sm">Receita atual</p>
                   </div>
                 </div>
               </div>

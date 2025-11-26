@@ -61,13 +61,13 @@ export function LoginForm() {
 
   return (
     <div 
-      className="flex flex-col space-y-3 sm:space-y-4 text-white p-4 sm:p-6 max-w-md mx-auto w-full"
+      className="flex flex-col space-y-3 sm:space-y-4 text-white dark:text-white light:text-gray-900 p-4 sm:p-6 max-w-md mx-auto w-full"
       role="main"
       aria-label="Formulário de login"
     >
       <Link 
         href="/" 
-        className="flex items-center space-x-2 text-white/70 hover:text-white transition-colors duration-200 group mb-2 w-fit"
+        className="flex items-center space-x-2 text-white/70 dark:text-white/70 light:text-gray-600 hover:text-white dark:hover:text-white light:hover:text-gray-900 transition-colors duration-200 group mb-2 w-fit"
       >
         <ArrowLeft className="h-4 w-4 sm:h-5 sm:w-5 group-hover:-translate-x-1 transition-transform duration-200" />
         <span className="text-xs sm:text-sm font-medium">Voltar</span>

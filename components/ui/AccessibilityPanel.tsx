@@ -39,7 +39,7 @@ export function AccessibilityPanel() {
           >
             {/* Header */}
             <div className="flex items-center justify-between mb-6">
-              <h2 id="accessibility-title" className="text-xl font-bold text-gray-900 dark:text-white">
+              <h2 id="accessibility-title" className="text-xl font-bold text-gray-900 dark:text-white light:text-gray-900">
                 Opções de Acessibilidade
               </h2>
               <button
@@ -58,8 +58,8 @@ export function AccessibilityPanel() {
                 <div className="flex items-center space-x-3">
                   <Eye className="w-5 h-5 text-blue-600" />
                   <div>
-                    <h3 className="font-medium text-gray-900 dark:text-white">
-                      Alto Contraste
+                    <h3 className="font-medium text-gray-900 dark:text-white light:text-gray-900">
+                      Contraste
                     </h3>
                     <p className="text-sm text-gray-600 dark:text-gray-400">
                       Aumenta o contraste das cores
