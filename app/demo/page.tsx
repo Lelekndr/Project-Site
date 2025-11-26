@@ -66,8 +66,8 @@ export default function DemoPage() {
         <div className="max-w-6xl mx-auto">
           {/* Header da página */}
           <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-white mb-4">Sistema de Autenticação Multi-Role</h1>
-            <p className="text-white/70 text-lg">
+            <h1 className="text-4xl font-bold text-white dark:text-white light:text-gray-900 mb-4">Sistema de Autenticação Multi-Role</h1>
+            <p className="text-white/70 dark:text-white/70 light:text-gray-700 text-lg">
               Demonstração do sistema com 3 tipos de usuários: Usuário, Criador e Administrador
             </p>
           </div>
@@ -90,12 +90,12 @@ export default function DemoPage() {
 
               {/* Permissões do usuário */}
               <div className="bg-white/10 backdrop-blur-md rounded-lg p-8 mb-8">
-                <h3 className="text-2xl font-bold text-white mb-6">Suas Permissões</h3>
+                <h3 className="text-2xl font-bold text-white dark:text-white light:text-gray-900 mb-6">Suas Permissões</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {getRolePermissions(user.role).map((permission, index) => (
                     <div key={index} className="flex items-center space-x-3">
                       <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                      <span className="text-white/80">{permission}</span>
+                      <span className="text-white/80 dark:text-white/80 light:text-gray-700">{permission}</span>
                     </div>
                   ))}
                 </div>
@@ -103,7 +103,7 @@ export default function DemoPage() {
 
               {/* Links rápidos baseados no role */}
               <div className="bg-white/10 backdrop-blur-md rounded-lg p-8">
-                <h3 className="text-2xl font-bold text-white mb-6">Acesso Rápido</h3>
+                <h3 className="text-2xl font-bold text-white dark:text-white light:text-gray-900 mb-6">Acesso Rápido</h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   {user.role === 'user' && (
                     <>
@@ -173,13 +173,13 @@ export default function DemoPage() {
           ) : (
             /* Instruções para login */
             <div className="bg-white/10 backdrop-blur-md rounded-lg p-8 text-center">
-              <h2 className="text-2xl font-bold text-white mb-6">Faça Login para Testar o Sistema</h2>
+              <h2 className="text-2xl font-bold text-white dark:text-white light:text-gray-900 mb-6">Faça Login para Testar o Sistema</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                 <div className="bg-blue-600/20 rounded-lg p-6">
                   <User className="w-12 h-12 text-blue-400 mx-auto mb-4" />
-                  <h3 className="text-lg font-semibold text-white mb-2">Usuário</h3>
-                  <p className="text-white/70 text-sm mb-4">Pode se inscrever em eventos e gerenciar seu perfil</p>
-                  <div className="text-xs text-white/60">
+                  <h3 className="text-lg font-semibold text-white dark:text-white light:text-gray-900 mb-2">Usuário</h3>
+                  <p className="text-white/70 dark:text-white/70 light:text-gray-700 text-sm mb-4">Pode se inscrever em eventos e gerenciar seu perfil</p>
+                  <div className="text-xs text-white/60 dark:text-white/60 light:text-gray-600">
                     <p>Email: usuario@test.com</p>
                     <p>Senha: user123456</p>
                   </div>
@@ -187,9 +187,9 @@ export default function DemoPage() {
 
                 <div className="bg-green-600/20 rounded-lg p-6">
                   <Zap className="w-12 h-12 text-green-400 mx-auto mb-4" />
-                  <h3 className="text-lg font-semibold text-white mb-2">Criador</h3>
-                  <p className="text-white/70 text-sm mb-4">Pode criar e gerenciar eventos</p>
-                  <div className="text-xs text-white/60">
+                  <h3 className="text-lg font-semibold text-white dark:text-white light:text-gray-900 mb-2">Criador</h3>
+                  <p className="text-white/70 dark:text-white/70 light:text-gray-700 text-sm mb-4">Pode criar e gerenciar eventos</p>
+                  <div className="text-xs text-white/60 dark:text-white/60 light:text-gray-600">
                     <p>Email: criador@test.com</p>
                     <p>Senha: creator123456</p>
                   </div>
@@ -197,9 +197,9 @@ export default function DemoPage() {
 
                 <div className="bg-red-600/20 rounded-lg p-6">
                   <Shield className="w-12 h-12 text-red-400 mx-auto mb-4" />
-                  <h3 className="text-lg font-semibold text-white mb-2">Administrador</h3>
-                  <p className="text-white/70 text-sm mb-4">Pode gerenciar tudo na plataforma</p>
-                  <div className="text-xs text-white/60">
+                  <h3 className="text-lg font-semibold text-white dark:text-white light:text-gray-900 mb-2">Administrador</h3>
+                  <p className="text-white/70 dark:text-white/70 light:text-gray-700 text-sm mb-4">Pode gerenciar tudo na plataforma</p>
+                  <div className="text-xs text-white/60 dark:text-white/60 light:text-gray-600">
                     <p>Email: admin@test.com</p>
                     <p>Senha: admin123456</p>
                   </div>

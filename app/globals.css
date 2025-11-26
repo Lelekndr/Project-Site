@@ -270,6 +270,24 @@ html {
   color: #fff !important;
 }
 
+/* Manter texto branco nos cards de evento (legibilidade sobre imagem escura) */
+.light .colala-background article .text-white,
+.light .colala-background article h1,
+.light .colala-background article h2,
+.light .colala-background article h3,
+.light .colala-background article p,
+.light .colala-background article span {
+  color: #fff !important;
+}
+
+.light .colala-background article .text-white\/90 {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.light .colala-background article .text-white\/80 {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
 /* Melhor contraste para toggles e switches */
 .switch-enhanced {
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);

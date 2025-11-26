@@ -19,7 +19,7 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen colala-background">
       <Header />
       <div className="container mx-auto px-0 sm:px-4">
         <div className="relative py-8 sm:py-12">

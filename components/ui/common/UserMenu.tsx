@@ -36,7 +36,7 @@ export function UserMenu({ user, onLogout }: UserMenuProps) {
           {user.name}
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56 bg-zinc-900 border-zinc-700">
+      <DropdownMenuContent className="w-56 bg-zinc-900 dark:bg-zinc-900 light:bg-white border-zinc-700 dark:border-zinc-700 light:border-gray-300">
         <DropdownMenuItem className="text-white dark:text-white light:text-gray-900 hover:bg-zinc-800 dark:hover:bg-zinc-800 light:hover:bg-gray-100">
           <User className="mr-2 h-4 w-4" />
           <span>Perfil</span>
@@ -53,9 +53,9 @@ export function UserMenu({ user, onLogout }: UserMenuProps) {
             <span>Administração</span>
           </DropdownMenuItem>
         )}
-        <DropdownMenuSeparator className="bg-zinc-700" />
+        <DropdownMenuSeparator className="bg-zinc-700 dark:bg-zinc-700 light:bg-gray-300" />
         <DropdownMenuItem 
-          className="text-red-400 hover:bg-zinc-800"
+          className="text-red-400 hover:bg-zinc-800 dark:hover:bg-zinc-800 light:hover:bg-gray-100"
           onClick={onLogout}
         >
           <LogOut className="mr-2 h-4 w-4" />

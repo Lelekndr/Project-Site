@@ -12,7 +12,7 @@ export function LoadMoreButton({ hasMore, onLoadMore }: LoadMoreButtonProps) {
     <div className="flex justify-center mt-8 sm:mt-12">
       <Button
         onClick={onLoadMore}
-        className="theme-bg-pink hover:theme-bg-purple theme-text-primary font-medium px-6 sm:px-8 py-2 sm:py-3 rounded-lg transition-colors text-sm sm:text-base min-h-[44px] min-w-[120px]"
+        className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-medium px-6 sm:px-8 py-2 sm:py-3 rounded-lg transition-colors text-sm sm:text-base min-h-[44px] min-w-[120px]"
         aria-label="Carregar mais eventos"
       >
         Carregar Mais

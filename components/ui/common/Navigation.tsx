@@ -12,7 +12,7 @@ interface NavigationProps {
 
 export function Navigation({ navItems }: NavigationProps) {
   return (
-    <nav className="hidden md:flex space-x-6 text-sm">
+    <nav className="hidden md:flex space-x-6 text-sm text-white dark:text-white light:text-gray-900">
       {navItems.map((item) => (
         <Link 
           key={item.name} 

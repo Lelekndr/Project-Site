@@ -27,8 +27,8 @@ export function CategoryFilter({ categories, activeCategory, onCategoryChange }:
             className={`
               flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 whitespace-nowrap min-h-[44px]
               ${activeCategory === category.slug
-                ? 'theme-bg-pink theme-text-primary shadow-lg'
-                : 'theme-bg-glass theme-text-secondary hover:theme-bg-card border theme-border'}
+                ? 'bg-pink-600 text-white shadow-lg'
+                : 'bg-white/10 dark:bg-white/10 light:bg-white/80 text-white/80 dark:text-white/80 light:text-gray-700 hover:bg-white/20 dark:hover:bg-white/20 light:hover:bg-gray-100 border border-white/20 dark:border-white/20 light:border-gray-300'}
             `}
             variant="ghost"
             role="tab"
@@ -54,8 +54,8 @@ export function CategoryFilter({ categories, activeCategory, onCategoryChange }:
             className={`
               px-6 py-2 rounded-full text-sm font-medium transition-all duration-200
               ${activeCategory === category.slug
-                ? 'theme-bg-pink theme-text-primary shadow-lg hover:theme-bg-purple'
-                : 'theme-bg-glass theme-text-secondary hover:theme-bg-card border theme-border'}
+                ? 'bg-pink-600 text-white shadow-lg hover:bg-purple-600'
+                : 'bg-white/10 dark:bg-white/10 light:bg-white/80 text-white/80 dark:text-white/80 light:text-gray-700 hover:bg-white/20 dark:hover:bg-white/20 light:hover:bg-gray-100 border border-white/20 dark:border-white/20 light:border-gray-300'}
             `}
             variant="ghost"
             role="tab"

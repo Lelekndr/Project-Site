@@ -94,7 +94,7 @@ export function Header() {
                   <div className="space-y-3">
                     <div className="flex items-center space-x-3 px-4 py-2">
                       <div className="w-8 h-8 bg-pink-600 rounded-full flex items-center justify-center">
-                        <User className="w-4 h-4 text-white" />
+                        <User className="w-4 h-4 text-white dark:text-white light:text-gray-900" />
                       </div>
                       <div>
                         <p className="text-sm font-medium text-white dark:text-white light:text-gray-900">{user.email}</p>
@@ -115,7 +115,7 @@ export function Header() {
                   <div className="space-y-3">
                     <Link
                       href="/login"
-                      className="block w-full px-4 py-3 text-center bg-pink-600 hover:bg-purple-600 rounded-lg transition-colors font-medium text-white"
+                      className="block w-full px-4 py-3 text-center bg-pink-600 hover:bg-purple-600 rounded-lg transition-colors font-medium text-white dark:text-white light:text-white"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       Login

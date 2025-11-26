@@ -108,16 +108,16 @@ export default function UserProfilePage() {
                     )}
                   </div>
                   <div className="flex-1">
-                    <h1 className="text-4xl font-bold text-white mb-2">{user?.name}</h1>
-                    <div className="flex items-center text-white/70 mb-2">
+                    <h1 className="text-4xl font-bold text-white dark:text-white light:text-gray-900 mb-2">{user?.name}</h1>
+                    <div className="flex items-center text-white/70 dark:text-white/70 light:text-gray-700 mb-2">
                       <Mail className="w-4 h-4 mr-2" />
                       {user?.email}
                     </div>
-                    <div className="flex items-center text-white/70 mb-3">
+                    <div className="flex items-center text-white/70 dark:text-white/70 light:text-gray-700 mb-3">
                       <MapPin className="w-4 h-4 mr-2" />
                       {editingLocation}
                     </div>
-                    <p className="text-white/80 text-lg max-w-md mb-4">{editingBio}</p>
+                    <p className="text-white/80 dark:text-white/80 light:text-gray-700 text-lg max-w-md mb-4">{editingBio}</p>
                     <div className="flex items-center gap-4">
                       <div className="inline-flex items-center px-3 py-1 rounded-full bg-blue-600/20 text-blue-400 text-sm">
                         <User className="w-3 h-3 mr-1" />
