@@ -68,7 +68,7 @@ Obrigado por usar nossa plataforma! 🚀`);
 
   return (
     <ProtectedRoute requiredRole="creator">
-      <div className="min-h-screen bg-gradient-to-br from-violet-900 via-purple-900 to-black">
+      <div className="min-h-screen colala-background bg-gradient-to-br from-violet-900 via-purple-900 to-black">
         <Header />
 
         <div className="container mx-auto px-4 py-12">

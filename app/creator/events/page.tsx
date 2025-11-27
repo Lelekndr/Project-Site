@@ -296,7 +296,7 @@ Clique em OK para confirmar o cancelamento.`);
 
   return (
     <ProtectedRoute requiredRole="creator">
-      <div className="min-h-screen theme-bg-primary">
+      <div className="min-h-screen colala-background theme-bg-primary">
         <Header />
         
         <div className="container mx-auto px-4 py-12">

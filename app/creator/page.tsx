@@ -6,10 +6,9 @@ import { Header } from '@/components/ui/common/Header';
 import { Footer } from '@/components/ui/common/Footer';
 import { ProtectedRoute } from '@/components/ui/common/ProtectedRoute';
 
-export default function CreatorDashboardPage() {
+export default function CreatorPage() {
   return (
-    <ProtectedRoute requiredRole="creator">
-      <div className="min-h-screen bg-gradient-to-br from-violet-900 via-purple-900 to-black">
+    <ProtectedRoute requiredRole="creator">\n      <div className="min-h-screen colala-background bg-gradient-to-br from-violet-900 via-purple-900 to-black">
         <Header />
         
         <div className="container mx-auto px-4 py-12">
